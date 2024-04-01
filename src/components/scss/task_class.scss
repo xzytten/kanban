@@ -1,0 +1,13 @@
+.task__class{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.activeClass{
+    margin-top: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px
+}

@@ -1,0 +1,104 @@
+//background
+@mixin background ($img, $width, $height) {
+    display: inline-block;
+    width: $width;
+    height: $height;
+    background-image: url($img);
+    background-size: cover;
+    background-position: center;
+}
+
+//end background
+
+//rounds
+@mixin profileImg($size) {
+    width: $size;
+    height: $size;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    img {
+        width: 90%;
+        height: auto;
+        display: block;
+    }
+}
+
+@mixin projectImg($width, $height, $marginLeft, $imgWidth) {
+    margin-left: $marginLeft;
+    width: $width;
+    height: $height;
+    border-radius: 10px;
+    box-shadow: 0px 0px 2px 1px rgb(0, 0, 0, 25%);
+    display: flex;
+    justify-content: center;
+
+    &__img {
+        width: $imgWidth;
+        height: auto;
+        margin: auto;
+    }
+}
+
+// end rounds
+
+//inputs
+@mixin input($padding, $width, $height, $paddingIco, $sizeIco ) {
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    width: $width;
+    height: $height;
+    margin-bottom: 24px;
+    background: url('../../img/search.jpg') no-repeat;
+    padding-left: $padding;
+    background-size: $sizeIco;
+    background-position: $paddingIco center;
+}
+
+//end inputs
+
+//edits
+@mixin edit($marginLeft, $width, $height) {
+    margin-right: $marginLeft;
+    display: block;
+    width: $width;
+    height: $height;
+    background: url(../../img/edit.jpg);
+    background-size: cover;
+    background-position: center;
+}
+
+//end edits
+
+//items
+@mixin toolbarItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 270px;
+    height: 70px;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 5.5px 1px rgb(0, 0, 0, 25%);
+}
+
+//end items
+
+// start exit
+
+@mixin exit($size){
+    position: absolute;
+    width: $size;
+    height: $size;
+    background:url('../../img/exit.jpg');
+    background-size: 100%;
+    cursor: pointer;
+    
+    &:hover{
+        transform: scale(1.1);
+    }
+}
+
+// end exit

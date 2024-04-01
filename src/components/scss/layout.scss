@@ -1,0 +1,11 @@
+.layout {
+    display: grid;
+    width: 100%;
+    grid-template-areas:
+        "toolbar header header"
+        "toolbar main main"
+        "toolbar main main";
+
+    grid-template-columns: auto 1fr 1fr;
+
+}

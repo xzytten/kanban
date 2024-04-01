@@ -1,0 +1,81 @@
+.header__item {
+    display: flex;
+    flex-direction: column;
+    width: 286.6px;
+    align-items: center;
+
+    &__plus {
+        width: 18px;
+        height: 18px;
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.08);
+        }
+    }
+
+
+    .task__class__header {
+        width: 286.6px;
+        display: flex;
+        justify-content: space-between;
+
+        &__item {
+            display: flex;
+            align-items: center;
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.05);
+            }
+
+            &__dot {
+                height: 12px;
+                width: 12px;
+                border-radius: 50%;
+            }
+
+            .notActive {
+                background-color: #cccccc;
+                box-shadow: 0px 0px 4px 2px rgba(186, 186, 186, 0.25);
+            }
+
+            .todo {
+                background-color: #FF6B00;
+                box-shadow: 0px 0px 4px 2px rgb(255, 107, 0, 25%);
+            }
+
+            .inprogress {
+                background-color: rgb(127, 80, 228);
+                box-shadow: 0px 0px 4px 2px rgb(127, 80, 228, 25%);
+
+            }
+
+            .needreview {
+                background-color: rgb(236, 217, 48);
+                box-shadow: 0px 0px 4px 2px rgb(236, 217, 48, 25%);
+
+            }
+
+            .done {
+                background-color: rgb(2, 185, 130);
+                box-shadow: 0px 0px 4px 2px rgb(2, 185, 130, 25%);
+
+            }
+
+
+
+            &__name {
+                margin-left: 10px;
+                font-size: 20px;
+            }
+
+            &__count {
+                font-size: 20px;
+                margin-left: 10px;
+            }
+
+        }
+
+    }
+}

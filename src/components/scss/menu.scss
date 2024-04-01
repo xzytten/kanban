@@ -1,0 +1,18 @@
+@import './colors.scss';
+
+.main__menu {
+    border-bottom: 1px solid $borderColor;
+    padding-left: 50px;
+    &__item {
+        cursor: pointer;
+        margin-left: 65px;
+        font-size: 20px;
+        background-color: #ffffff;
+        border: none;
+
+        &__active {
+            padding-bottom: 10px;
+            border-bottom: 3px solid #7A51EE;
+        }
+    }
+}

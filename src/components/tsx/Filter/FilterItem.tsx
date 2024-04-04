@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import '../../scss/filter_item.scss';
 
-const MemberItem: FC = () => {
+const FilterItem: FC = () => {
     return (
 
         <article className='role'>
@@ -11,4 +11,4 @@ const MemberItem: FC = () => {
     );
 };
 
-export default MemberItem;
+export default FilterItem;

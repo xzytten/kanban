@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
 import GroupMembersItem from './GroupMembersItem';
+import MoreMembers from './MoreMembers';
 
 import '../../scss/group_member.scss';
-import MoreMembers from './MoreMembers';
 
 const GroupMembers: FC = () => {
     return (

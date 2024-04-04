@@ -2,6 +2,7 @@ import React, { FC, useState } from 'react';
 import { IHeaderTask } from '../interfaceTask/IHeaderTask';
 
 import '../../../../scss/header_task_item.scss';
+import AddTask from '../../AddTask';
 
 
 interface IHeaderTaskItemProps extends IHeaderTask {
@@ -10,6 +11,9 @@ interface IHeaderTaskItemProps extends IHeaderTask {
 }
 
 const HeaderTaskItem: FC<IHeaderTaskItemProps> = ({ totalFilter, toggleTaskClass, taskClass, name, count }) => {
+
+
+    const [modal, setModal] = useState<boolean>(false);
 
     return (
         <section className='header__item'>
@@ -20,11 +24,12 @@ const HeaderTaskItem: FC<IHeaderTaskItemProps> = ({ totalFilter, toggleTaskClass
                     <p className='task__class__header__item__count'>{count[taskClass]}</p>
 
                 </div>
-                <img src={require('../../../../../img/plus.png')} alt="" className='header__item__plus' onClick={() => console.log(taskClass)} />
+                <img src={require('../../../../../img/plus.png')} alt="" className='header__item__plus' onClick={() => setModal(true) } />
             </article>
+            {modal && <AddTask taskClass={taskClass} setModal={setModal}/>}
         </section>
 
     );
 };
 
-export default HeaderTaskItem;
+export default HeaderTaskItem;  

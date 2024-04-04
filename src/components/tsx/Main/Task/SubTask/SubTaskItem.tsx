@@ -1,11 +1,13 @@
 import { FC } from 'react';
+import { ISubtask } from '../interfaceTask/ISubtask'; 
+
 import '../../../../scss/subtask_item.scss';
 
-const SubTaskItem: FC = () => {
+const SubTaskItem: FC<ISubtask> = ({description, status}) => {
     return (
         <div className='subtask__item'>
-            <span className='subtask__item__done' ></span>
-            <p className='subtask__item__description'>And, in our Business English classes, we’ll prepare you for success in all contexts, teaching you to communicate, present and negotiate with confidence.</p>
+            <span className={status ? `subtask__item__done` : 'subtask__item__unmade'} ></span>
+            <p className='subtask__item__description'>{description}</p>
         </div>
     );
 };

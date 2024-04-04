@@ -6,8 +6,6 @@ import SubTaskItem from './SubTaskItem';
 const SubTask: FC = () => {
     return (
         <div className='subtask'>
-           <SubTaskItem/>
-           <SubTaskItem/>
         </div>
     );
 };

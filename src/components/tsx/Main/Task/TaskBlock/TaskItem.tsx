@@ -5,8 +5,7 @@ import FilterItem from '../../../Filter/FilterItem';
 import { ITaskItem } from '../interfaceTask/ITaskInfo';
 import ViewTask from '../ViewTask';
 
-import '../../../../scss/task_item.scss'
-
+import '../../../../scss/task_item.scss';
 
 const TaskItem: FC<ITaskItem> = () => {
 

@@ -23,6 +23,37 @@
         }
     }
 
+    &__done {
+        width: 26px;
+        height: 26px;
+
+        background: url('../../img/done.jpg') no-repeat;
+        background-size: 100%;
+
+        // &:hover {
+        //     cursor: pointer;
+        //     background: url('../../img/donePreview.jpg')no-repeat;
+        //     background-size: 100%;
+
+        // }
+    }
+
+    &__unmade{
+        width: 26px;
+        height: 26px;
+
+        background: url('../../img/taskComplete.jpg') no-repeat;
+        background-size: 100%;
+
+        &:hover {
+            cursor: pointer;
+            background: url('../../img/donePreview.jpg')no-repeat;
+            background-size: 100%;
+
+        }
+    }
+
+
 
 
     &__description {

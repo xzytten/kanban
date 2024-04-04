@@ -1,0 +1,28 @@
+.add {
+    margin: 0 auto;
+    margin-top: 50px;
+    display: flex;
+    width: 290px;
+    height: 52px;
+    position: relative;
+    align-items: center;
+
+    &:hover{
+        cursor: pointer;
+    }
+
+    &__border {
+
+        width: 290px;
+        height: 52px;
+    }
+
+    &__name {
+        color: rgb(0, 0, 0, 40%);
+        font-size: 18px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+}

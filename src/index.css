@@ -1,6 +1,9 @@
 body{
     background-color: rgb(255, 255, 255);
+    /* overflow: hidden; */
 }
+
+
 
 /* @font-face{
     font-family: 'Montserrat', sans-serif;
@@ -15,4 +18,9 @@ body{
     font-weight: 200;
     margin:0;
     padding: 0;
+}
+textarea {
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

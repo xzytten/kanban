@@ -10,7 +10,7 @@ interface IHeaderTaskItemProps extends IHeaderTask {
     name: string,
 }
 
-const HeaderTaskItem: FC<IHeaderTaskItemProps> = ({ totalFilter, toggleTaskClass, taskClass, name, count }) => {
+const HeaderTaskItem: FC<IHeaderTaskItemProps> = ({ totalFilter, toggleTaskClass, taskClass, name, count, someArray, setSomeArray }) => {
 
 
     const [modal, setModal] = useState<boolean>(false);
@@ -26,7 +26,7 @@ const HeaderTaskItem: FC<IHeaderTaskItemProps> = ({ totalFilter, toggleTaskClass
                 </div>
                 <img src={require('../../../../../img/plus.png')} alt="" className='header__item__plus' onClick={() => setModal(true) } />
             </article>
-            {modal && <AddTask taskClass={taskClass} setModal={setModal}/>}
+            {modal && <AddTask setSomeArray={setSomeArray} someArray={someArray} taskClass={taskClass} setModal={setModal}/>}
         </section>
 
     );

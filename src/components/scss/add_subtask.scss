@@ -5,43 +5,43 @@
 
 
     .add__subtask {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 500px;
+        width: 650px;
         height: 400px;
         background-color: white;
-        border: 1px solid $borderColor;
         border-radius: 5px;
-        z-index: 9999; /* Підійде відповідним значенням залежно від вашого контексту */
 
-
-        &__exit {
-            right: 10px;
-            top: 10px;
-            @include exit(20px);
-        }
-
-        &__title {
-            font-size: 20px;
-            margin-left: 34px;
+        &__header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-top: 38px;
+
+            &__title {
+                font-size: 20px;
+            }
+
+            &__button {
+                width: 95px;
+                height: 40px;
+                background-color: #7A51EE;
+                border: none;
+                border-radius: 5px;
+                color: white;
+                font-size: 18px;
+
+                &:hover {
+                    cursor: pointer;
+                    transform: scale(1.05);
+                }
+            }
         }
 
         &__description {
+            @include textarea;
             display: block;
-            margin: 0 auto;
             margin-top: 15px;
-            font-size: 18px;
-            width: 400px;
-            height: 230px;
-            padding-left: 19px;
-            padding-top: 14px;
-            padding-right: 19px;
-            border: 1px solid $borderColor;
-            border-radius: 10px;
-            resize: none;
+            width: 576px;
+       
 
             &:focus {
                 border: 1px solid $borderColor;
@@ -49,22 +49,5 @@
             }
         }
 
-        &__button {
-            position: absolute;
-            right: 34px;
-            bottom: 20px;
-            width: 95px;
-            height: 40px;
-            background-color: #7A51EE;
-            border: none;
-            border-radius: 5px;
-            color: white;
-            font-size: 18px;
-
-            &:hover {
-                cursor: pointer;
-                transform: scale(1.05);
-            }
-        }
     }
 }

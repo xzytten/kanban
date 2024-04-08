@@ -7,7 +7,7 @@ import ViewTask from '../ViewTask';
 
 import '../../../../scss/task_item.scss';
 
-const TaskItem: FC<ITaskItem> = () => {
+const TaskItem: FC<ITaskItem> = ({description, filter, id, title}) => {
 
     const [viewTask, setViewTask] = useState<boolean>(false);
 
@@ -24,8 +24,8 @@ const TaskItem: FC<ITaskItem> = () => {
                 <span className='task__item__header__edit'></span>
             </div>
             <div className='task__item__block'>
-                <h3 className='task__item__block__name' onClick={toggleModal}>First design concept</h3>
-                <p className='task__item__block__description'>Create conceper based shos time of morning abu bylo ...</p>
+                <h3 className='task__item__block__name' onClick={toggleModal}>{title}</h3>
+                <p className='task__item__block__description'>{description.length > 20 ? description.slice(0, 30) + "..." : description}</p>
                 <section className='task__item__block__info'>
                     <article className='task__item__block__info__done'>
                         <img src={require('../../../../../img/doneIco.jpg')} alt='done' className='task__item__block__info__done__ico' />
@@ -50,7 +50,7 @@ const TaskItem: FC<ITaskItem> = () => {
                     </article>
                 </section>
             </div>
-            {viewTask && <ViewTask toggleModal={toggleModal} />}
+            {viewTask && <ViewTask description={description} filter={filter} title={title} id={id} toggleModal={toggleModal} />}
         </article>
     );
 };

@@ -58,6 +58,21 @@
     background-position: $paddingIco center;
 }
 
+@mixin textarea() {
+    min-height: 131px;
+    max-height: 500px;
+    font-size: 18px;
+    padding-left: 36px;
+    padding-right: 36px;
+    padding-top: 15px;
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    resize: none;
+    overflow-y: auto;
+
+
+}
+
 //end inputs
 
 //edits
@@ -88,15 +103,15 @@
 
 // start exit
 
-@mixin exit($size){
+@mixin exit($size) {
     position: absolute;
     width: $size;
     height: $size;
-    background:url('../../img/exit.jpg');
+    background: url('../../img/exit.jpg');
     background-size: 100%;
     cursor: pointer;
-    
-    &:hover{
+
+    &:hover {
         transform: scale(1.1);
     }
 }

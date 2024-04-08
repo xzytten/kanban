@@ -42,20 +42,21 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-
+                
                 &__info {
                     font-size: 16px;
                     border: none;
+                    border-bottom: 1px solid $borderColor;
                     width: 140px;
                     text-align: center;
                     color: rgb(0, 0, 0, 40%);
                     cursor: pointer;
-
+                    
                     &:focus {
                         outline: none;
                     }
                 }
-
+                
                 &__ico {
                     width: 26px;
                     height: 26px;
@@ -111,14 +112,8 @@
             }
 
             &__description {
-                height: 131px;
-                font-size: 18px;
-                padding-left: 36px;
-                padding-right: 36px;
-                padding-top: 15px;
-                border: 1px solid $borderColor;
-                border-radius: 10px;
-                resize: none;
+
+                @include textarea;
 
                 &:focus {
                     border: 1px solid $borderColor;

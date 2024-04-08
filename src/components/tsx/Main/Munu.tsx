@@ -6,7 +6,7 @@ interface IMenuProps {
 }
 
 const Munu: FC<IMenuProps> = ({ setActiveMenu }) => {
-    const [active, setActive] = useState<string>('');
+    const [active, setActive] = useState<string>('task');
 
     const toggleActiveItem = (item: string): void => {
         setActiveMenu(item);

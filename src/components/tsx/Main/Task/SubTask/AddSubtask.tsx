@@ -2,6 +2,8 @@ import { FC, useEffect, useState } from 'react';
 
 import '../../../../scss/add_subtask.scss'
 import { ISubtask } from '../interfaceTask/ISubtask';
+import { v4 as uuidv4 } from 'uuid';
+
 interface IAddSubtaskProps {
     subtasks: ISubtask[],
     setSubtasks: (subtasks: ISubtask[]) => void;
@@ -9,13 +11,17 @@ interface IAddSubtaskProps {
 
 const AddSubtask: FC<IAddSubtaskProps> = ({ setSubtasks, subtasks }) => {
 
+    const idSubtask = uuidv4();
     const [description, setDescription] = useState<string>('')
-
+ 
     const addSubtask = () => {
         if (description.trim() !== '') {
-            setSubtasks([...subtasks, { id: Date.now(), description, status: false }])
-            console.log(subtasks)
-
+            try {
+                setSubtasks([...subtasks, { id: idSubtask, description, status: false }])
+                setDescription('')
+            } catch (error) {
+                throw (error)
+            }
         }
     }
 

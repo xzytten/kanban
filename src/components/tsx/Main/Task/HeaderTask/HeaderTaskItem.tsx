@@ -24,9 +24,12 @@ const HeaderTaskItem: FC<IHeaderTaskItemProps> = ({ totalFilter, toggleTaskClass
                     <p className='task__class__header__item__count'>{count[taskClass]}</p>
 
                 </div>
-                <img src={require('../../../../../img/plus.png')} alt="" className='header__item__plus' onClick={() => setModal(true) } />
+                {taskClass === 'todo'
+                    ?
+                    <img src={require('../../../../../img/plus.png')} alt="" className='header__item__plus' onClick={() => setModal(true)} />
+                    : null}
             </article>
-            {modal && <AddTask setSomeArray={setSomeArray} someArray={someArray} taskClass={taskClass} setModal={setModal}/>}
+            {modal && <AddTask setSomeArray={setSomeArray} someArray={someArray} taskClass={taskClass} setModal={setModal} />}
         </section>
 
     );

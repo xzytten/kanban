@@ -6,18 +6,21 @@ import AddSubtask from '../../Task/SubTask/AddSubtask';
 
 import '../../../../scss/subtask_block.scss';
 import SubtaskItemGroup from './SubtaskItemGroup';
+interface ISubtasksBlock {
+    setSubtasks: (subtasks: ISubtask[]) => void,
+    subtasks: ISubtask[]
+}
+const SubtaskBlock: FC<ISubtasksBlock> = ({ setSubtasks, subtasks }) => {
 
-const SubtaskBlock: FC = () => {
-
-    const [subtasks, setSubtasks] = useState<ISubtask[]>([]);
+    // const [subtasks, setSubtasks] = useState<ISubtask[]>([]);
 
     return (
         <article className='add__task__block__subtask'>
             <h3 className='add__task__block__subtask__title'>Subtasks</h3>
             {/* <AddButton name='Add subtask' setAddSubtask={setAddSubtask} /> */}
             {/* {addSubtask ? <AddSubtask setAddSubtask={setAddSubtask} setSubtasks={setSubtasks} subtasks={subtasks} /> : null} */}
-            {subtasks ? <SubtaskItemGroup subtasks={subtasks} /> : null}
-            <AddSubtask  setSubtasks={setSubtasks} subtasks={subtasks} />
+            {subtasks ? <SubtaskItemGroup setSubtasks={setSubtasks} subtasks={subtasks} /> : null}
+            <AddSubtask setSubtasks={setSubtasks} subtasks={subtasks} />
         </article>
     );
 };

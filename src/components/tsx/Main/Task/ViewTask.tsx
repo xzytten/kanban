@@ -11,7 +11,7 @@ interface IViewTaskProps extends ITaskItem {
     toggleModal: () => void;
 
 }
-const ViewTask: FC<IViewTaskProps> = ({ toggleModal, description, filter, title }) => {
+const ViewTask: FC<IViewTaskProps> = ({ toggleModal, description, filter, title, subtask }) => {
     return (
         <div className='view__task'>
             <section className='view__task__block'>
@@ -26,7 +26,7 @@ const ViewTask: FC<IViewTaskProps> = ({ toggleModal, description, filter, title 
                     <p className='view__task__block__views__count'>2</p>
                 </article>
                 <p className='view__task__block__description'>{description}</p>
-                <SubTask />
+                <SubTask  subtask={subtask}/>
             </section>
         </div>
     );

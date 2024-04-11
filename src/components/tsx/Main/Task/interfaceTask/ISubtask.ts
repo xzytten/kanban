@@ -1,5 +1,5 @@
 export interface ISubtask {
-    id: number,
+    id: string,
     description: string,
     status: boolean,
 }

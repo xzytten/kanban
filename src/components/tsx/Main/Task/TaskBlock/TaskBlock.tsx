@@ -10,12 +10,12 @@ interface ITaskBlockProps {
     array: ITaskItem[],
 }
 
-const TaskBlock: FC<ITaskBlockProps> = ({ activeClass, filter, array }) => {
+const TaskBlock: FC<ITaskBlockProps> = ({ activeClass, filter, array,  }) => {
     return (
         <article className={`${activeClass ? activeClass : 'task__class'}`}>
             {
                 array.map(item => (
-                    filter === item.filter && <TaskItem key={item.id} id={item.id} description={item.description} filter={item.filter} title={item.title}/>
+                    filter === item.filter && <TaskItem subtask={item.subtask} key={item.id} id={item.id} description={item.description} filter={item.filter} title={item.title}/>
                 ))
             }
         </article >

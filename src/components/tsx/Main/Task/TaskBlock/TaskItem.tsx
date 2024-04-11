@@ -7,13 +7,12 @@ import ViewTask from '../ViewTask';
 
 import '../../../../scss/task_item.scss';
 
-const TaskItem: FC<ITaskItem> = ({description, filter, id, title}) => {
+const TaskItem: FC<ITaskItem> = ({ description, filter, id, title, subtask }) => {
 
     const [viewTask, setViewTask] = useState<boolean>(false);
 
     const toggleModal = () => {
         setViewTask(!viewTask);
-        console.log(viewTask)
     }
 
     return (
@@ -29,7 +28,7 @@ const TaskItem: FC<ITaskItem> = ({description, filter, id, title}) => {
                 <section className='task__item__block__info'>
                     <article className='task__item__block__info__done'>
                         <img src={require('../../../../../img/doneIco.jpg')} alt='done' className='task__item__block__info__done__ico' />
-                        <p className='task__item__block__info__done__info'>0/2</p>
+                        <p className='task__item__block__info__done__info'>{subtask.filter(item => item.status === true).length}/{subtask.length}</p>
                     </article>
                     <article className='task__item__block__info__date'>
                         <img src={require('../../../../../img/dateIco.jpg')} alt='date' className='task__item__block__info__date__ico' />
@@ -50,7 +49,7 @@ const TaskItem: FC<ITaskItem> = ({description, filter, id, title}) => {
                     </article>
                 </section>
             </div>
-            {viewTask && <ViewTask description={description} filter={filter} title={title} id={id} toggleModal={toggleModal} />}
+            {viewTask && <ViewTask subtask={subtask} description={description} filter={filter} title={title} id={id} toggleModal={toggleModal} />}
         </article>
     );
 };

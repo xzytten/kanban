@@ -8,7 +8,7 @@ import '../../../../scss/header_task.scss'
 
 interface IHeaderTaskProps extends IHeaderTask { }
 
-const HeaderTask: FC<IHeaderTaskProps> = ({ totalFilter, count, toggleTaskClass, someArray, setSomeArray}) => {
+const HeaderTask: FC<IHeaderTaskProps> = ({ totalFilter, count, toggleTaskClass, someArray, setSomeArray }) => {
 
     const toggleTotalFilter = (taskClass: string): void => {
         totalFilter === taskClass ? toggleTaskClass('all') : toggleTaskClass(taskClass);

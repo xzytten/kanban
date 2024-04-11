@@ -1,3 +1,5 @@
+@import './mixins.scss';
+
 .subtask__item {
     display: flex;
     width: 610px;
@@ -14,13 +16,7 @@
 
         background: url('../../img/taskComplete.jpg') no-repeat;
         background-size: 100%;
-
-        &:hover {
-            cursor: pointer;
-            background: url('../../img/donePreview.jpg')no-repeat;
-            background-size: 100%;
-
-        }
+        cursor: pointer;
     }
 
     &__done {
@@ -29,16 +25,9 @@
 
         background: url('../../img/done.jpg') no-repeat;
         background-size: 100%;
-
-        // &:hover {
-        //     cursor: pointer;
-        //     background: url('../../img/donePreview.jpg')no-repeat;
-        //     background-size: 100%;
-
-        // }
     }
 
-    &__unmade{
+    &__unmade {
         width: 26px;
         height: 26px;
 
@@ -54,10 +43,20 @@
     }
 
 
+    &__delete{
+        @include exit(20px);
+        position: relative;
+    }
 
-
+    
     &__description {
+        width: 610px;
+        min-height: 0px;
+        max-height: auto;
         font-size: 17px;
         margin-left: 22px;
+        margin-right: 22px;
+        word-wrap: break-word;
+        overflow: auto; 
     }
 }

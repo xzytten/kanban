@@ -42,7 +42,7 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                
+
                 &__info {
                     font-size: 16px;
                     border: none;
@@ -51,12 +51,12 @@
                     text-align: center;
                     color: rgb(0, 0, 0, 40%);
                     cursor: pointer;
-                    
+
                     &:focus {
                         outline: none;
                     }
                 }
-                
+
                 &__ico {
                     width: 26px;
                     height: 26px;
@@ -122,8 +122,19 @@
             }
         }
 
+        &__submit {
+            width: 95px;
+            height: 40px;
+            background-color: #7A51EE;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 18px;
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.05);
+            }
+        }
     }
 }
-
-
- 

@@ -2,11 +2,13 @@ import { FC, useState } from 'react';
 import { Dispatch, SetStateAction } from 'react';
 import FilterItem from '../Filter/FilterItem';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import SubtaskBlock from './Task/SubTask/SubtaskBlock';
-
-import '../../scss/add_task.scss';
 import { ITaskItem } from './Task/interfaceTask/ITaskInfo';
+import { ISubtask } from './Task/interfaceTask/ISubtask';
+import { v4 as uuidv4 } from 'uuid';
+
+import 'react-datepicker/dist/react-datepicker.css';
+import '../../scss/add_task.scss';
 
 interface IAddTaskProps {
     taskClass: string,
@@ -21,10 +23,17 @@ const AddTask: FC<IAddTaskProps> = ({ taskClass, setModal, someArray, setSomeArr
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [description, setDescription] = useState<string>('');
     const [name, setName] = useState<string>('');
-
+    const [subtasks, setSubtasks] = useState<ISubtask[]>([])
+    
+    const idSubtask = uuidv4();
 
     const addTask = () => {
-        setSomeArray(prevArray => [...prevArray, { id: Date.now(), description: description, filter: taskClass, title: name }])
+        try {
+            setSomeArray(prevArray => [...prevArray, { id: idSubtask, description: description, filter: taskClass, title: name, subtask: subtasks || [] }])
+            setModal(false)
+        } catch (error) {
+            throw (error);
+        }
     }
 
     return (
@@ -52,7 +61,7 @@ const AddTask: FC<IAddTaskProps> = ({ taskClass, setModal, someArray, setSomeArr
                     <input onChange={(e) => setName(e.target.value)} type="text" placeholder='Task name' className='add__task__block__form__title' />
                     <textarea onChange={(e) => setDescription(e.target.value)} className='add__task__block__form__description' placeholder="Description" />
                 </article>
-                <SubtaskBlock />
+                <SubtaskBlock setSubtasks={setSubtasks} subtasks={subtasks} />
                 <article className='add__task__block__files'></article>
                 <button className='add__task__block__submit' onClick={addTask}>Submit</button>
             </section>

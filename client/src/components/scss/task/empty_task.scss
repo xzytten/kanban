@@ -1,0 +1,8 @@
+@import '../colors.scss';
+
+.empty_task{
+    display: block;
+    width: 286.6px;
+    height: 286.6px;
+    border: 1px solid $borderColor;    
+}

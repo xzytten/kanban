@@ -1,0 +1,6 @@
+@import '../mixins.scss';
+
+.group__member__item{
+    background-color: rgb(234, 234, 234);
+    @include profileImg(32px);
+}

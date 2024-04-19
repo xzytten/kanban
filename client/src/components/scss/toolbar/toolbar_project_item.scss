@@ -1,0 +1,24 @@
+@import '../mixins.scss';
+
+.toolbar__project__item {
+
+    @include toolbarItem;
+
+    &__block {
+        display: flex;
+        align-items: center;
+
+        &__round {
+            @include projectImg(46px, 46px, 11px, 35px);
+        }
+
+        &__title {
+            margin-left: 11px;
+            font-size: 17px;
+        }
+    }
+
+    &__edit {
+        @include edit(20px, 25px, 15px)
+    }
+}

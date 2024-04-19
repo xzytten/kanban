@@ -1,0 +1,141 @@
+@import '../colors.scss';
+@import '../mixins.scss';
+
+.add__task {
+    top: 0;
+    left: 0;
+    position: fixed;
+    background-color: rgb(0, 0, 0, 40%);
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 10000;
+
+
+    &__block {
+    z-index: 10000;
+        background-color: white;
+        border-radius: 10px;
+        position: fixed;
+        width: 650px;
+        height: 90vh;
+        top: 50%;
+        left: 50%;
+        overflow: scroll;
+        scrollbar-width: none;
+        transform: translate(-50%, -50%);
+        padding-left: 50px;
+        padding-right: 50px;
+
+        &__exit {
+            @include exit(20px);
+            right: 12px;
+            top: 10px;
+        }
+
+        &__header {
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+
+            &__date {
+                width: 180px;
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                &__info {
+                    font-size: 16px;
+                    border: none;
+                    border-bottom: 1px solid $borderColor;
+                    width: 140px;
+                    text-align: center;
+                    color: rgb(0, 0, 0, 40%);
+                    cursor: pointer;
+
+                    &:focus {
+                        outline: none;
+                    }
+                }
+
+                &__ico {
+                    width: 26px;
+                    height: 26px;
+                    border: none;
+                    background: url('../../../img/calendar.jpg') no-repeat;
+                    background-size: 100%;
+                }
+
+            }
+
+
+
+            .custom-date-input::-webkit-calendar-picker-indicator {
+                display: none;
+            }
+
+            &__filters {
+                display: flex;
+                gap: 10px;
+
+                &__add {
+                    font-size: 20px;
+                    width: 80px;
+                    height: 22px;
+                    border: none;
+                    background-color: rgb(188, 188, 188, 25%);
+                    border-radius: 18px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                }
+            }
+
+        }
+
+        &__form {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 28px;
+
+            &__title {
+                height: 50px;
+                font-size: 18px;
+                padding-left: 36px;
+                border: 1px solid $borderColor;
+                border-radius: 10px;
+
+                &:focus {
+                    border: 1px solid $borderColor;
+                    outline: none;
+                }
+            }
+
+            &__description {
+
+                @include textarea;
+
+                &:focus {
+                    border: 1px solid $borderColor;
+                    outline: none;
+                }
+            }
+        }
+
+        &__submit {
+            width: 95px;
+            height: 40px;
+            background-color: #7A51EE;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 18px;
+
+            &:hover {
+                cursor: pointer;
+                transform: scale(1.05);
+            }
+        }
+    }
+}

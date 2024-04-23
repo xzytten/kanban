@@ -6,15 +6,21 @@ const Project = new mongoose.Schema({
         type: String,
         required: true,
     },
-    members: [{
+    author: {
+        // type: mongoose.Schema.Types.ObjectId,
+        // ref: "User"
+        type: String,
+        default: "Maks"
+    },
+    member: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Member'
     }],
-    tasks: [{
+    task: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Task'
     }],
-    roles: [{
+    role: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Role'
     }]

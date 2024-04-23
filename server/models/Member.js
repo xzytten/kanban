@@ -1,17 +1,10 @@
 import mongoose from 'mongoose';
-import Role from './Role';
 
 const Member = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true,
+    userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
     },
-
-    img: {
-        type: String,
-        default: '',
-    },
-
     position: {
         type: String,
         default: 'guest'

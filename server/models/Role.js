@@ -5,11 +5,10 @@ const Role = new mongoose.Schema({
         type: String,
         required: true,
     },
-    color:{
+    color: {
         type: String,
         required: true,
     }
-},
-    { timestamps: true })
+},)
 
-export default mongoose.model('Role', Role);
+export default mongoose.model('Role', Role); 

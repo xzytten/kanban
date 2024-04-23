@@ -3,6 +3,11 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors'
 import taskRouter from './routes/task.js';
+import subtaskRouter from './routes/subtask.js'
+import roleRouter from './routes/role.js';
+import memberRouter from './routes/member.js';
+import projectRouter from './routes/project.js';
+import userRouter from './routes/user.js';
 
 dotenv.config();
 const app = express();
@@ -18,7 +23,11 @@ app.use(express.json());
 
 //Routes
 app.use('/api/task', taskRouter)
-
+app.use('/api/subtask', subtaskRouter)
+app.use('/api/role', roleRouter);
+app.use('/api/member', memberRouter);
+app.use('/api/project', projectRouter);
+app.use('/api/user', userRouter);
 
 async function serverStart() {
     try {

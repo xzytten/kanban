@@ -5,6 +5,10 @@ const User = new mongoose.Schema({
         type: String,
         required: true,
     },
+    emeil:{
+        type:String,
+        require: true,
+    },
     password: {
         type: String,
         required: true,
@@ -13,9 +17,10 @@ const User = new mongoose.Schema({
         type: String,
         default: '',
     },
-    project: {
-        
-    }
+    project: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Project'
+    }]
 },
     { timestamps: true })
 

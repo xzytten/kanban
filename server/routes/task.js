@@ -1,12 +1,13 @@
 import { Router } from 'express';
-import { postTask } from '../controllers/task.js';
+import { postTask, getOneTask } from '../controllers/task.js';
 const taskRouter = new Router();
 
-//GET
 //http://localhost:3002/api/task/postTask
-taskRouter.post('/postTask', postTask)
+taskRouter.post('/postTask', postTask);
 
-//POST
+//http://localhost:3002/api/task/getOneTask
+taskRouter.get('/getOneTask', getOneTask);
+
 
 //UPDATE
 

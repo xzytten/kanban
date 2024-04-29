@@ -1,10 +1,11 @@
 import { FC, useState } from 'react';
 
+
+import Task from './Task/TaskBlock/Task';
+import Member from './Member/Member';
 import Menu from './Munu'
 
 import '../../scss/main.scss'
-import Task from './Task/TaskBlock/Task';
-import Member from './Member/Member';
 
 const Main: FC = () => {
 
@@ -14,7 +15,7 @@ const Main: FC = () => {
         <div className='main'>
             <Menu setActiveMenu={setActiveMenu} />
 
-          
+
             {(() => {
                 switch (activeMenu) {
                     case 'member':

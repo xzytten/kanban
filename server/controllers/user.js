@@ -33,7 +33,7 @@ export const register = async (req, res) => {
         await newUser.save();
 
         res.json({
-            newUser,
+            user: newUser,
             token,
             message: 'Seccesful register'
         });
@@ -46,9 +46,10 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
     try {
         const { name, password } = req.body;
-        
+
         if (name && password) {
             const user = await User.findOne({ name });
+
             if (!user) {
                 return res.json({ message: { name: 'Error, user is not declared' } })
             }
@@ -75,6 +76,31 @@ export const login = async (req, res) => {
 
 
     } catch (e) {
+        res.json({ message: 'Error login :(' })
+    }
+}
+
+export const getMe = async (req, res) => {
+    try {
+        const user = await User.findById(req.userId)
+        console.log(req.body)
+        if (!user) {
+            return res.json('Error, user is not declared.')
+        }
+
+        const token = jwt.sign({
+            id: user._id,
+        },
+            'ofghjiDFJBNuigjiopdfk9082348hgfjDFDirkd9o3',
+            { expiresIn: '30d' }
+        );
+
+        res.json({
+            user,
+            token,
+            message: 'getMe yes',
+        })
+    } catch (error) {
         res.json({ message: 'Error login :(' })
     }
 }

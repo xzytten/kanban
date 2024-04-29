@@ -32,6 +32,11 @@
         @include background('../../img/profile_exit.jpg', 28px, 28px);
         margin-right: 26px;
         margin-left: 69px;
+        
+        &:hover{
+            cursor: pointer;
+            transform: scale(1.05);
+        }
     }
 
 }

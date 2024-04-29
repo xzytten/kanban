@@ -1,8 +1,8 @@
 import { FC, useState } from 'react';
+
 import '../../scss/statistic.scss'
 
 const Statistic: FC = () => {
-
     const [progress, setProgress] = useState<number>(20)
 
     return (

@@ -5,10 +5,6 @@ const User = new mongoose.Schema({
         type: String,
         required: true,
     },
-    emeil:{
-        type:String,
-        require: true,
-    },
     password: {
         type: String,
         required: true,

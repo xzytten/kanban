@@ -1,26 +1,36 @@
-body{
+body {
     background-color: rgb(255, 255, 255);
     /* overflow: hidden; */
 }
 
-
-
-/* @font-face{
-    font-family: 'Montserrat', sans-serif;
-    src: local('Montserrat'),
-    url('./fonts/DM_Sans/static/DMSans-BoldItalic.ttf') format('ttf');
-} */
-
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Flex:opsz,wght@8..144,100..1000&display=swap');
 
-*{
-    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode',  Verdana;
+* {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Verdana;
     font-weight: 200;
-    margin:0;
+    margin: 0;
     padding: 0;
 }
+
 textarea {
     backface-visibility: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar:focus {
+    outline: 2px solid blue;
+}
+
+
+
+::-webkit-scrollbar-thumb {
+    background-color: #cbcaca;
+    border-radius: 4px;
+
 }

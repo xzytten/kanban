@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { IUser } from '../types/IAuth';
 
 import axios from '../../utils/axios'
+import { IProject } from '../types/IProject';
 
 interface IInitialState {
     user: IUser | null,
@@ -30,7 +31,7 @@ export const login = createAsyncThunk(
             }
             return data;
         } catch (error) {
-            console.log(error)
+            throw (error)
         }
     }
 );
@@ -45,7 +46,7 @@ export const register = createAsyncThunk(
             }
             return data;
         } catch (error) {
-            console.log(error)
+            throw (error)
         }
     }
 )
@@ -58,7 +59,7 @@ export const getMe = createAsyncThunk(
 
             return data;
         } catch (error) {
-            return error
+            throw (error)
         }
     }
 )
@@ -77,6 +78,7 @@ const authSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            //register
             .addCase(register.pending, (state) => {
                 state.status = 'pending';
             })
@@ -88,6 +90,7 @@ const authSlice = createSlice({
             .addCase(register.rejected, (state) => {
                 state.status = 'rejected';
             })
+            //login
             .addCase(login.pending, (state) => {
                 state.status = 'pending';
             })
@@ -99,22 +102,18 @@ const authSlice = createSlice({
             .addCase(login.rejected, (state) => {
                 state.status = 'rejected';
             })
-            //  getMe
+            //getMe
             .addCase(getMe.pending, (state) => {
                 state.status = 'pending';
             })
-
             .addCase(getMe.fulfilled, (state, action: PayloadAction<IInitialState>) => {
                 state.user = action.payload?.user;
                 state.token = action.payload?.token;
                 state.status = 'fulfilled';
-
             })
-
             .addCase(getMe.rejected, (state, action) => {
                 state.status = 'rejected';
             })
-
     }
 })
 

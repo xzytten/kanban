@@ -1,6 +1,7 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useState } from 'react';
 import ToolbarProject from './ToolbarProject/ToolbarProject';
 import ToolbarMembers from './ToolbarMember/ToolbarMember';
+import AddButton from '../Main/Task/Utils/AddButton';
 
 import '../../scss/toolbar/toolbar.scss'
 
@@ -11,7 +12,6 @@ const Toolbar: FC = () => {
         setToolbar(!toolbar)
     }
 
-
     return (
         <div className={`toolbar ${toolbar ? 'toolbar__show' : 'toolbar__hide'}`} >
             {
@@ -21,9 +21,7 @@ const Toolbar: FC = () => {
                 <button className='tooggle__modal__hide' onClick={toggleToolbar}></button>
             }
             <div className={`${toolbar ? 'showItem' : 'hideItem'}`}>
-            
                 <ToolbarProject />
-                <ToolbarMembers />
             </div>
         </div>
 

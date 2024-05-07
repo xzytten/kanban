@@ -1,4 +1,5 @@
 import User from '../models/User.js'
+import Project from '../models/Project.js'
 import bcrypt from 'bcrypt'
 import jwt from "jsonwebtoken"
 
@@ -83,7 +84,7 @@ export const login = async (req, res) => {
 export const getMe = async (req, res) => {
     try {
         const user = await User.findById(req.userId)
-        console.log(req.body)
+
         if (!user) {
             return res.json('Error, user is not declared.')
         }
@@ -95,11 +96,18 @@ export const getMe = async (req, res) => {
             { expiresIn: '30d' }
         );
 
+        // Отримання списку айді проєктів, які належать користувачеві
+        // const projectIds = user.project;
+
+        // // Знайдемо всі проєкти за цими айді
+        // const projects = await Project.find({ _id: { $in: projectIds } });
+
         res.json({
             user,
             token,
             message: 'getMe yes',
         })
+
     } catch (error) {
         res.json({ message: 'Error login :(' })
     }

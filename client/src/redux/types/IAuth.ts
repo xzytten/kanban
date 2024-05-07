@@ -1,8 +1,8 @@
 import { IProject } from "./IProject";
 
 export interface IUser{
-    id: string,
+    _id: string,
     name: string, 
     img: string,
-    project: IProject[],
+    project: [],
 }

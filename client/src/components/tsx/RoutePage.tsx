@@ -17,7 +17,6 @@ const RoutePage: FC = () => {
 
     const isAuth = useAppSelector(checkIsAuth);
     const status = useAppSelector(state => state.auth.status)
-    console.log(isAuth)
 
     useEffect(() => {
         if (!isAuth) {
@@ -37,7 +36,7 @@ const RoutePage: FC = () => {
 
             {
                 pageStatus === 'pending' ? (
-                    <div>s</div>
+                    <div></div>
                 ) :
                     (
                         <Routes>

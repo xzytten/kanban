@@ -3,6 +3,7 @@
 
 .toolbar__project {
     margin-top: 70px;
+    height: 500px;
 
     &__title {
         margin-bottom: 17px;
@@ -11,5 +12,12 @@
 
     &__search {
         @include input(56px, 214px, 45px, 21px, 26px);
+    }
+
+    &__item-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 5px 5px 5px 5px;
     }
 }

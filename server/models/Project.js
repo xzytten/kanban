@@ -7,10 +7,8 @@ const Project = new mongoose.Schema({
         required: true,
     },
     author: {
-        // type: mongoose.Schema.Types.ObjectId,
-        // ref: "User"
-        type: String,
-        default: "Maks"
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User"
     },
     member: [{
         type: mongoose.Schema.Types.ObjectId,

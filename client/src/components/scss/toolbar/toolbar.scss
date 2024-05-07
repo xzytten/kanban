@@ -1,7 +1,8 @@
 @import '../colors.scss';
 
-@mixin button ($url){
+@mixin button ($url) {
     position: fixed;
+    height: 100%;
     left: 5px;
     top: 5px;
     display: block;
@@ -12,22 +13,26 @@
     background-size: cover;
     background-position: center;
 }
+
 .toolbar {
     z-index: 999;
     position: fixed;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 350px;
+    width: 352px;
     grid-area: toolbar;
     border-right: 1px solid $borderColor;
-    overflow: hidden;
+    overflow: auto;
     background-color: white;
     height: 100%;
+
+
 
     &__show {
         position: fixed;
         width: 350px;
+        display: flex;
         background-color: white;
         height: 100%;
         transition: width 0.5s ease;
@@ -48,8 +53,10 @@
 }
 
 .tooggle__modal__show {
-  @include button('../../../img/left.png')
+    @include button('../../../img/left.png')
 }
+
 .tooggle__modal__hide {
     @include button('../../../img/right.png')
-  }
+}
+

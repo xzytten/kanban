@@ -1,28 +1,32 @@
-.add {
-    margin: 0 auto;
-    margin-top: 50px;
-    display: flex;
-    width: 290px;
-    height: 52px;
-    position: relative;
-    align-items: center;
+.add__container {
+    height: 80px;
 
-    &:hover{
-        cursor: pointer;
-    }
-
-    &__border {
-
-        width: 290px;
+    .add {
+        margin: 0 auto;
+        margin-top: 50px;
+        display: flex;
+        width: 270px;
         height: 52px;
-    }
+        position: relative;
+        align-items: center;
 
-    &__name {
-        color: rgb(0, 0, 0, 40%);
-        font-size: 18px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        &:hover {
+            cursor: pointer;
+        }
+
+        &__border {
+
+            width: 270px;
+            height: 52px;
+        }
+
+        &__name {
+            color: rgb(0, 0, 0, 40%);
+            font-size: 18px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
     }
 }

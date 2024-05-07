@@ -4,9 +4,9 @@ const projectRouter = new Router();
 
 //GET
 //http://localhost:3002/api/task/projectPost
-projectRouter.post('/postProject', postProject)
 
-projectRouter.get('/getProject', getProject)
+projectRouter.post('/addProject', postProject)
+projectRouter.post('/getProject', getProject)
 
 
 export default projectRouter;

@@ -1,15 +1,34 @@
-import { FC } from 'react';
-import '../../../scss/member/member.scss';
+import { FC, useEffect, useState } from 'react';
+import { useAppDispatch, useAppSelector } from '../../../../redux/hooks/hook';
+
+import { getMember } from '../../../../redux/slices/MemberSlice';
 import MemberItem from './MemberItem';
 
+import '../../../scss/member/member.scss';
+import { IMember } from '../../../../redux/types/IMember';
+
 const Member: FC = () => {
+    const [members, setMembers] = useState<IMember[] | null>(null)
+    const dispatch = useAppDispatch();
+
+    const memberIds = useAppSelector(project => project.project.project?.member);
+    const allMembers = useAppSelector(member => member.member?.member);
+
+    useEffect(() => {
+        if (memberIds) {
+            dispatch(getMember({ memberIds }))
+        }
+    }, [dispatch, memberIds])
+
+    useEffect(() => {
+        if (allMembers) {
+            setMembers(allMembers);
+        }
+    }, [allMembers]);
+
     return (
         <article className='main__members'>
-            <MemberItem/>
-            <MemberItem/>
-            <MemberItem/>
-            <MemberItem/>
-            <MemberItem/>
+            {members?.map(member => <MemberItem key={member._id} member={member}/>)}
         </article>
     );
 };

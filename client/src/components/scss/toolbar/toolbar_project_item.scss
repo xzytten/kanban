@@ -1,7 +1,10 @@
 @import '../mixins.scss';
 
 .toolbar__project__item {
-
+    &:hover{
+        transform: scale(1.05);
+        cursor: pointer;
+    }
     @include toolbarItem;
 
     &__block {

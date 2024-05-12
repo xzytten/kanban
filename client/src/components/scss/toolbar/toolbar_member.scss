@@ -10,6 +10,6 @@
     }
 
     &__search {
-        @include input(56px, 214px, 45px, 21px, 26px);
+        @include search(56px, 214px, 45px, 21px, 26px);
     }
 }

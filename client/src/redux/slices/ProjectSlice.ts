@@ -47,7 +47,11 @@ export const getProjects = createAsyncThunk(
 const projectSlice = createSlice({
     name: 'project',
     initialState,
-    reducers: {},
+    reducers: {
+        chooseProject: (state, action: PayloadAction<IProject | null>) => {
+            state.project = action.payload;
+        }
+    },
     extraReducers: (builder) => {
         builder
             .addCase(getProjects.pending, (state) => {
@@ -75,5 +79,5 @@ const projectSlice = createSlice({
     }
 })
 
-export const { reducer } = projectSlice;
-
+export const { reducer} = projectSlice;
+export const { chooseProject } = projectSlice.actions;

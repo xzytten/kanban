@@ -8,6 +8,7 @@ interface IInitialState {
     user: IUser | null,
     token: string | null,
     status: string | null,
+    message: string | null,
 }
 
 interface RootState {
@@ -18,6 +19,7 @@ const initialState: IInitialState = {
     user: null,
     token: null,
     status: null,
+    message: null,
 }
 
 export const login = createAsyncThunk(
@@ -98,6 +100,7 @@ const authSlice = createSlice({
                 state.user = action.payload.user;
                 state.token = action.payload.token;
                 state.status = 'fulfilled';
+                state.message = action.payload?.message;
             })
             .addCase(login.rejected, (state) => {
                 state.status = 'rejected';

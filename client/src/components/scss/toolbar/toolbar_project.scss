@@ -11,7 +11,20 @@
     }
 
     &__search {
-        @include input(56px, 214px, 45px, 21px, 26px);
+        @include input(26px, 250px, 45px, 21px, 26px);
+        margin-bottom: 40px;
+        font-size: 17px;
+
+        outline: none;
+        
+        &:focus {
+            box-shadow: 0px 0px 4px 1px $clearPurpleColor;
+        }
+
+        &:active {
+            border-color: $borderColor;
+        }
+
     }
 
     &__item-container {

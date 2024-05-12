@@ -46,7 +46,7 @@
 // end rounds
 
 //inputs
-@mixin input($padding, $width, $height, $paddingIco, $sizeIco ) {
+@mixin search($padding, $width, $height, $paddingIco, $sizeIco ) {
     border: 1px solid $borderColor;
     border-radius: 10px;
     width: $width;
@@ -56,6 +56,34 @@
     padding-left: $padding;
     background-size: $sizeIco;
     background-position: $paddingIco center;
+    outline: none;
+
+    &:focus {
+        box-shadow: 0px 0px 4px 1px $clearPurpleColor;
+    }
+
+    &:active {
+        border-color: $borderColor;
+    }
+}
+
+
+
+@mixin input($padding, $width, $height, $paddingIco, $sizeIco ) {
+    border: 1px solid $borderColor;
+    border-radius: 10px;
+    width: $width;
+    height: $height;
+    padding-left: $padding;
+    outline: none;
+
+    &:focus {
+        box-shadow: 0px 0px 4px 1px $clearPurpleColor;
+    }
+
+    &:active {
+        border-color: $borderColor;
+    }
 }
 
 @mixin textarea() {

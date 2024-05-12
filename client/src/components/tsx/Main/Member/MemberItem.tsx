@@ -2,8 +2,13 @@ import { FC } from 'react';
 import FilterItem from '../../Filter/FilterItem';
 
 import '../../../scss/member/member_item.scss';
+import { IMember } from '../../../../redux/types/IMember';
 
-const MemberItem: FC = () => {
+interface IMemberItem{
+    member: IMember,
+}
+
+const MemberItem: FC<IMemberItem> = ({member}) => {
     return (
         <section className='main__members__item'>
             <figure className='main__members__item__profile'>
@@ -12,7 +17,7 @@ const MemberItem: FC = () => {
                         <img src={require("../../../../img/member1.png")} alt="" className='main__members__item__profile__block__round__img' />
                     </div>
                     <div className='main__members__item__profile__block__info'>
-                        <figcaption className='main__members__item__profile__block__info__name'>Some People</figcaption>
+                        <figcaption className='main__members__item__profile__block__info__name'>{member.userName}</figcaption>
                         <FilterItem/>
                     </div>
                 </div>

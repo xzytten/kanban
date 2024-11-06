@@ -1,0 +1,16 @@
+.task {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    max-width: 1367px;
+    width: 100%;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.task > * {
+    flex: 1 1 25%;
+    max-width: 25%;
+    box-sizing: border-box;  
+}

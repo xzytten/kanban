@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Layout from './components/tsx/Layout/Layout';
-import RoutePage from './components/tsx/RoutePage';
+import Layout from './components/Layout/Layout';
+import RoutePage from './components/RoutePage';
 import './index.css'
 
 import { Provider } from 'react-redux'; // Імпортуємо Provider з react-redux

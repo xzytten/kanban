@@ -95,15 +95,13 @@ export const getMe = async (req, res) => {
             'ofghjiDFJBNuigjiopdfk9082348hgfjDFDirkd9o3',
             { expiresIn: '30d' }
         );
-
-        // Отримання списку айді проєктів, які належать користувачеві
-        // const projectIds = user.project;
-
-        // // Знайдемо всі проєкти за цими айді
-        // const projects = await Project.find({ _id: { $in: projectIds } });
-
+        
         res.json({
-            user,
+            user: {
+                _id: user.id,
+                name: user.name,
+                img: user.img
+            },
             token,
             message: 'getMe yes',
         })

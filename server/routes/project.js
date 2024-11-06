@@ -1,12 +1,13 @@
 import { Router } from 'express';
-import { postProject, getProject } from '../controllers/project.js';
+import { addProject, getProjects, getProjectInvite, addProjectInvite } from '../controllers/project.js';
 const projectRouter = new Router();
 
 //GET
 //http://localhost:3002/api/task/projectPost
 
-projectRouter.post('/addProject', postProject)
-projectRouter.post('/getProject', getProject)
-
+projectRouter.post('/addProject', addProject)
+projectRouter.get('/getProjects/:userId', getProjects)
+projectRouter.get('/getProjectInvite/:token/:userId', getProjectInvite)
+projectRouter.post('/addProjectInvite', addProjectInvite)
 
 export default projectRouter;

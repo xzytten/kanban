@@ -1,0 +1,15 @@
+@import '../mixins/colors.scss';
+@import '../mixins/mixins.scss';
+
+.toolbar__member {
+    margin-top: 50px;
+
+    &__title {
+        margin-bottom: 17px;
+        font-weight: 20px;
+    }
+
+    &__search {
+        @include search(56px, 214px, 45px, 21px, 26px);
+    }
+}

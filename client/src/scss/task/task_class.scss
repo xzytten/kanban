@@ -1,0 +1,24 @@
+.task__class{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.activeClass{
+    margin-top: 30px;
+    // display: flex;
+    // flex-direction: column;
+    // flex-wrap: wrap;
+    // align-items: center;
+    // gap: 25px;
+    max-height: 100vh;
+    width: 100%;
+    height: 100vh;
+    padding-top: 20px;
+}
+
+.activeColumn {
+    border:1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+}  

@@ -1,25 +1,24 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { IUser } from '../types/IAuth';
+import { IUser } from '../../types/IAuth';
 
 import axios from '../../utils/axios'
-import { IProject } from '../types/IProject';
 
-interface IInitialState {
+interface UserState {
     user: IUser | null,
-    token: string | null,
-    status: string | null,
-    message: string | null,
+    token: string,
+    status: string,
+    message: string,
 }
 
 interface RootState {
-    auth: IInitialState;
+    auth: UserState;
 }
 
-const initialState: IInitialState = {
+const initialState: UserState = {
     user: null,
-    token: null,
-    status: null,
-    message: null,
+    token: "",
+    status: "",
+    message: "",
 }
 
 export const login = createAsyncThunk(
@@ -74,8 +73,13 @@ const authSlice = createSlice({
     reducers: {
         logout: state => {
             state.user = null
-            state.token = null
-            state.status = null
+            state.token = ""
+            state.status = ""
+        },
+        pushProjectId: (state, action: PayloadAction<string> ) => {
+            if(state.user){
+                state.user.project.push(action.payload)
+            }
         }
     },
     extraReducers: (builder) => {
@@ -84,7 +88,7 @@ const authSlice = createSlice({
             .addCase(register.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(register.fulfilled, (state, action: PayloadAction<IInitialState>) => {
+            .addCase(register.fulfilled, (state, action: PayloadAction<UserState>) => {
                 state.user = action.payload.user;
                 state.token = action.payload.token;
                 state.status = 'fulfilled';
@@ -96,7 +100,7 @@ const authSlice = createSlice({
             .addCase(login.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(login.fulfilled, (state, action: PayloadAction<IInitialState>) => {
+            .addCase(login.fulfilled, (state, action: PayloadAction<UserState>) => {
                 state.user = action.payload.user;
                 state.token = action.payload.token;
                 state.status = 'fulfilled';
@@ -109,7 +113,7 @@ const authSlice = createSlice({
             .addCase(getMe.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(getMe.fulfilled, (state, action: PayloadAction<IInitialState>) => {
+            .addCase(getMe.fulfilled, (state, action: PayloadAction<UserState>) => {
                 state.user = action.payload?.user;
                 state.token = action.payload?.token;
                 state.status = 'fulfilled';
@@ -122,4 +126,4 @@ const authSlice = createSlice({
 
 export const { reducer } = authSlice;
 export const checkIsAuth = (state: RootState) => Boolean(state.auth.token);
-export const { logout } = authSlice.actions;
+export const { logout, pushProjectId } = authSlice.actions;

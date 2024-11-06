@@ -1,0 +1,71 @@
+@import '../mixins/mixins.scss';
+
+.toolbar__project__item {
+    position: relative;
+
+    &:hover {
+        box-shadow: 0px 0px 4px 5px rgb(0, 0, 0, 10%);
+        scale: (1.02);
+        cursor: pointer;
+    }
+
+
+    @include toolbarItem;
+
+    &__block {
+        display: flex;
+        align-items: center;
+
+        &__round {
+            @include projectImg(46px, 46px, 11px, 35px);
+        }
+
+        &__title {
+            margin-left: 11px;
+            font-size: 17px;
+        }
+    }
+
+    &__edit {
+        @include edit(20px, 25px, 15px);
+
+        &:hover {
+            transform: scale(1.1);
+            cursor: pointer;
+        }
+    }
+
+    &__edit-modal {
+        background-color: rgb(235, 235, 235);
+        padding: 13px 12px 13px 12px;
+        height: auto;
+        position: absolute;
+        top: -30px;
+        right: 0px;
+        border-radius: 6px;
+
+
+        &__ul {
+            // padding: 10px 10px 10px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            width: 100%;
+
+
+            &__li {
+                
+                font-size: 13px;
+                list-style: none;
+
+                &:hover {
+
+                    scale: (1.06);
+                    color: rgba(109, 15, 197, 0.808);
+                }
+            }
+        }
+
+    }
+}

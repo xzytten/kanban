@@ -1,0 +1,20 @@
+@import '../mixins/colors.scss';
+@import '../mixins/mixins.scss';
+
+.more__member {
+
+    background-color: #E5DDFA;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid #987BE8;
+    border-radius: 50%;
+    cursor: pointer;
+
+    &__count {
+        color: #987BE8;
+        font-size: 12px;
+    }
+}

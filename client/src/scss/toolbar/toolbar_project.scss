@@ -1,0 +1,25 @@
+@import '../mixins/colors.scss';
+@import '../mixins/mixins.scss';
+
+.toolbar__project {
+    margin-top: 70px;
+    height: 500px;
+
+    &__title {
+        margin-bottom: 17px;
+        font-weight: 20px;
+    }
+
+    &__search {
+        @include input(26px, 250px, 45px, 21px, 26px);
+        margin-bottom: 40px;
+        font-size: 17px;
+    }
+
+    &__item-container {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        padding: 5px 5px 5px 5px;
+    }
+}

@@ -21,6 +21,10 @@ const Project = new mongoose.Schema({
     role: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Role'
+    }],
+    inviteUrl: [{
+        type: String,
+        ref: 'inviteUrl'
     }]
 },
     { timestamps: true })

@@ -1,6 +1,10 @@
 import mongoose from 'mongoose';
 
 const Task = new mongoose.Schema({
+    project: {
+        type: String,
+        require: true
+    },
     title: {
         type: String,
         required: true,
@@ -9,9 +13,23 @@ const Task = new mongoose.Schema({
         type: String,
         required: true,
     },
-    subtasks: [{
+    type: {
+        type: String,
+        default: 'todo'
+    },
+    filters: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Subtask"
+        ref: "Filter"
+    }],
+    subtasks: [{
+        description: {
+            type: String,
+            require: true
+        },
+        status: {
+            type: Boolean,
+            default: false
+        }
     }],
     views: {
         type: Number,
@@ -21,7 +39,7 @@ const Task = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId, ref: 'Member'
     },
     date: {
-        type: String,
+        type: Date,
         required: true
     }
 },

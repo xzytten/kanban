@@ -9,7 +9,5 @@ subtaskRouter.post('/postSubtask', postSubtask);
 //http://localhost:3002/api/subtask/getSubtask
 subtaskRouter.get('/getSubtask', getSubtask);
 
-
 //UPDATE
-
 export default subtaskRouter;

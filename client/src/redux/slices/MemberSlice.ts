@@ -1,11 +1,11 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { IMember } from '../types/IMember';
+import { IMember } from '../../types/IMember';
 
 import axios from '../../utils/axios'
 
 interface IInitialState {
     member: IMember[],
-    status: string | null,
+    status: string ,
 }
 
 interface RootState {
@@ -14,7 +14,7 @@ interface RootState {
 
 const initialState: IInitialState = {
     member: [],
-    status: null,
+    status: ''
 }
 
 

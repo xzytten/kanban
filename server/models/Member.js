@@ -9,9 +9,17 @@ const Member = new mongoose.Schema({
         type: String,
         default: 'guest'
     },
-    roles: [{
+    solved: {
+        type: Number,
+        default: 0
+    },
+    notInTime: {
+        type: Number,
+        default: 0
+    },
+    filters: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Role'
+        ref: 'Filter'
     }]
 },
     { timestamps: true })

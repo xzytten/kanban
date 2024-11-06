@@ -1,0 +1,18 @@
+.drop__area {
+    opacity: 0.7;
+    width: 285px;
+    height: 285px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 12px;
+    position: relative;
+    background-color: white;
+    margin: 0 auto;
+    margin-bottom: 20px;
+    transition: all 0.2s ease-in-out;   
+}
+
+.drop__hide{
+    opacity: 0; 
+}

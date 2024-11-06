@@ -1,0 +1,27 @@
+@import '../mixins/mixins.scss';
+
+.toolbar__member__item {
+
+    @include toolbarItem;
+
+    &__block {
+
+        display: flex;
+        align-items: center;
+
+        &__round {
+            box-shadow: 0px 0px 2px 1px rgb(0, 0, 0, 25%);
+            margin-left: 10px;
+            @include profileImg(38px)
+        }
+
+        &__title {
+            margin-left: 11px;
+            font-size: 17px;
+        }
+    }
+
+    &__edit {
+        @include edit(20px, 25px, 15px)
+    }
+}

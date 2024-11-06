@@ -1,0 +1,50 @@
+@import '../mixins/mixins.scss';
+@import '../mixins/colors.scss';
+
+.profile {
+    grid-area: profile;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: end;
+
+    &__setting {
+        @include background('../../img/profile_setting.jpg', 28px, 28px);
+        margin-right: 40px;
+        transition-property: transform;
+        transition-duration: 0.9s;
+
+        &:hover {
+
+            cursor: pointer;
+            transform: rotate(110deg) scale(1.05);
+        }
+    }
+
+    &__profile {
+        display: flex;
+        align-items: center;
+
+        &__round {
+            @include profileImg(48px)
+        }
+
+        &__name {
+            margin-left: 24px;
+            font-size: 20px;
+        }
+    }
+
+    &__exit {
+        @include background('../../img/profile_exit.jpg', 28px, 28px);
+        margin-right: 26px;
+        margin-left: 69px;
+
+        &:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+    }
+
+}

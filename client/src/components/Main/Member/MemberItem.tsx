@@ -18,7 +18,7 @@ const MemberItem: FC<IMemberItem> = ({member}) => {
                     </div>
                     <div className='main__members__item__profile__block__info'>
                         <figcaption className='main__members__item__profile__block__info__name'>{member.userName}</figcaption>
-                        <FilterItem/>
+                        <FilterItem  filter={'frontEnd'}/>
                     </div>
                 </div>
                 <span className='main__members__item__profile__edit'></span>

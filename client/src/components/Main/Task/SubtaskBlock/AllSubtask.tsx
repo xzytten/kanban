@@ -6,14 +6,15 @@ import { ISubtask } from '../interfaceTask/ISubtask';
 import SubtaskItemGroup from './SubtaskItem/SubtaskItemGroup';
 
 interface ISubtaskProps {
-    subtask: ISubtask[]
+    subtask: ISubtask[],
+    showCheckbox: boolean,
 }
 
 
-const AllSubTask: FC<ISubtaskProps> = ({ subtask }) => {
+const AllSubTask: FC<ISubtaskProps> = ({ subtask, showCheckbox}) => {
     return (
         <div className='subtask'>
-            <SubtaskItemGroup subtasks={subtask}/>
+            <SubtaskItemGroup subtasks={subtask} showCheckbox={showCheckbox}/>
         </div>
     );
 };

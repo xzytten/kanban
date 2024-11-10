@@ -64,7 +64,7 @@ const TaskItem: FC<ITaskItemProps> = ({ setDraggedItem, task, filter, deleteItem
             {editButton ? <TaskEditButton task={task} deleteItem={() => deleteOneItem(task._id)} /> : null}
             {viewTask && <ViewTask task={task} toggleModal={toggleModal} />}
             <div className='task__item__header'>
-                <FilterItem />
+                <FilterItem filter={'Frontend'}/>
                 <span className='task__item__header__edit' onClick={toggleEditButton}></span>
             </div>
             <div className='task__item__block'>

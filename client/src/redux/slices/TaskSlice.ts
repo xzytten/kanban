@@ -25,6 +25,7 @@ export const addTask = createAsyncThunk(
     'task/addTask',
     async (params: ITask) => {
         try {
+            console.log('AddTask - ', params)
             const { data } = await axios.post('task/addTask', params);
             return data;
         } catch (error) {

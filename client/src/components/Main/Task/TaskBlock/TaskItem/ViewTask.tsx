@@ -17,8 +17,8 @@ const ViewTask: FC<IViewTaskProps> = ({ toggleModal, task }) => {
         <div className='view__task'>
             <section className='view__task__block'>
                 <article className='view__task__block__header'>
-                    <FilterItem />
-                    <GroupMembers />
+                <FilterItem  filter={'frontEnd'}/>
+                <GroupMembers />
                 </article>
                 <span className='view__task__block__exit' onClick={toggleModal}></span>
                 <h2 className='view__task__block__title'>{task.title}</h2>
@@ -27,7 +27,7 @@ const ViewTask: FC<IViewTaskProps> = ({ toggleModal, task }) => {
                     <p className='view__task__block__views__count'>2</p>
                 </article>
                 <p className='view__task__block__description'>{task.description}</p>
-                {task.subtasks && <AllSubtask subtask={task.subtasks} />}
+                {task.subtasks && <AllSubtask subtask={task.subtasks} showCheckbox={true}/>}
             </section>
         </div>
     );

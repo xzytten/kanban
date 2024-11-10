@@ -4,14 +4,14 @@ import { ISubtask } from '../../interfaceTask/ISubtask';
 import '../../../../../scss/subtask/subtask_item.scss';
 
 
-interface ISubtaskItemProps  {
+interface ISubtaskItemProps {
     setSubtasks?: (subtasks: ISubtask[]) => void,
     subtasks: ISubtask[],
     subtask: ISubtask
-
+    showCheckbox: boolean;
 }
 
-const SubTaskItem: FC<ISubtaskItemProps> = ({ setSubtasks, subtask, subtasks }) => {
+const SubTaskItem: FC<ISubtaskItemProps> = ({ setSubtasks, subtask, subtasks, showCheckbox }) => {
 
     const [newStatus, setNewStatus] = useState<boolean>(subtask.status);
 
@@ -29,18 +29,23 @@ const SubTaskItem: FC<ISubtaskItemProps> = ({ setSubtasks, subtask, subtasks }) 
     }
 
 
-    const deleteSubtask = (taskId: string): void => {
-        if (setSubtasks) {
-            setSubtasks([...subtasks.filter(subtask => subtask._id !== taskId)]);
+    const deleteSubtask = (subtask: ISubtask): void => {
+        const updatedSubtasks = subtasks.filter(sub => sub !== subtask)
+        
+        if(setSubtasks){
+            setSubtasks(updatedSubtasks)
         }
+   
     }
 
 
     return (
         <div className='subtask__item'>
-            <span onClick={toggleStatus} className={newStatus ? `subtask__item__done` : 'subtask__item__unmade'} ></span>
+            {
+                showCheckbox && <span onClick={toggleStatus} className={newStatus ? `subtask__item__done` : 'subtask__item__unmade'} ></span>
+            }
             <p className='subtask__item__description'>{subtask.description}</p>
-            {setSubtasks ? <span className="subtask__item__delete" onClick={() => subtask._id && deleteSubtask(subtask._id)}></span> : null}
+            {setSubtasks ? <span className="subtask__item__delete" onClick={() => deleteSubtask(subtask)}></span> : null}
         </div>
     );
 };

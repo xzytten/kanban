@@ -88,7 +88,9 @@
 
 @mixin textarea() {
     min-height: 131px;
-    max-height: 500px;
+    min-height: 200px;
+    width: auto;
+    height: auto;
     font-size: 18px;
     padding-left: 36px;
     padding-right: 36px;
@@ -96,7 +98,7 @@
     border: 1px solid $borderColor;
     border-radius: 10px;
     resize: none;
-    overflow-y: auto;
+    overflow: hidden;
 
 
 }

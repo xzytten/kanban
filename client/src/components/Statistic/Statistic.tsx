@@ -13,13 +13,13 @@ const Statistic: FC = () => {
 
     const changeProgress = (): void => {
         let doneTasks: number = 0;
-        if (reduxProject) {
-            reduxTasks.forEach(item => {
-                if (item.type === 'done') {
-                    doneTasks += 1;
-                }
-            })
-        }
+        // if (reduxProject) {
+        //     reduxTasks.forEach(item => {
+        //         if (item.type === 'done') {
+        //             doneTasks += 1;
+        //         }
+        //     })
+        // }
         const progress: number = doneTasks !== 0 ? (doneTasks / reduxTasks.length) * 100 : 0;
         setProgress(parseFloat(progress.toFixed(1)))
     }

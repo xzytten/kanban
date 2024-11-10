@@ -4,7 +4,7 @@ import Project from '../models/Project.js';
 //postTask
 export const addTask = async (req, res) => {
     try {
-
+        console.log('Add Task - ', req.body)
         const { project, title, description, type, filters, subtasks, date, author } = req.body;
 
         if (project) {

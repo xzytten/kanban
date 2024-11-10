@@ -1,7 +1,6 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useRef, useState } from 'react';
 
 import { ISubtask } from '../interfaceTask/ISubtask';
-import { v4 as uuidv4 } from 'uuid';
 
 import '../../../../scss/subtask/add_subtask.scss'
 
@@ -12,20 +11,26 @@ interface IAddSubtaskProps {
 
 const AddSubtask: FC<IAddSubtaskProps> = ({ setSubtasks, subtasks }) => {
 
-    const idSubtask = uuidv4();
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null);
     const [description, setDescription] = useState<string>('')
- 
+
     const addSubtask = () => {
         if (description.trim() !== '') {
             try {
-                setSubtasks([...subtasks, { _id: idSubtask, description, status: false }])
+                setSubtasks([...subtasks, { description, status: false }])
                 setDescription('')
             } catch (error) {
                 throw (error)
             }
         }
     }
-
+    const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+        setDescription(e.target.value);
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto'; 
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; 
+        }
+    };
     return (
         <div className='add__subtask__container'>
             <div className='add__subtask'>
@@ -34,7 +39,8 @@ const AddSubtask: FC<IAddSubtaskProps> = ({ setSubtasks, subtasks }) => {
                     <button className="add__subtask__header__button" onClick={addSubtask}>Add</button>
                 </div>
                 <textarea
-                    onChange={(e) => setDescription(e.target.value)}
+                    ref={textareaRef}
+                    onChange={(e) => handleDescriptionChange(e)}
                     value={description}
                     placeholder='Subtask description'
                     className='add__subtask__description'>

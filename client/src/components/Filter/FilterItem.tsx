@@ -1,11 +1,14 @@
 import { FC } from 'react';
 import '../../scss/filter/filter_item.scss';
 
-const FilterItem: FC = () => {
+interface IFilterItem {
+    filter: string,
+}
+const FilterItem: FC<IFilterItem> = ({ filter }) => {
     return (
 
         <article className='role'>
-            <p className='role__name'>Frontend</p>
+            <p className='role__name'>{filter}</p>
         </article>
 
     );

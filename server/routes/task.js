@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { addTask, getOneTask, getAllTask, deleteOneTask, editTypeTask  } from '../controllers/task.js';
 const taskRouter = new Router();
 
-//http://localhost:3002/api/task/postTask
+//http://localhost:3002/api/task/addTask
 taskRouter.post('/addTask', addTask);
 
 //http://localhost:3002/api/task/getOneTask

@@ -152,8 +152,6 @@ export const getProjects = async (req, res) => {
 
         const projects = await Project.find({ _id: { $in: projectIds } }).select('_id name inviteUrl');
 
-        console.log(projects)
-
         res.json({
             projects,
             message: "Project and roles found"

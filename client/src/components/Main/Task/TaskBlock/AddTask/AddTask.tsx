@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC, useEffect, useState, useRef } from 'react';
 import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks/hook';
 import { ISubtask } from '../../interfaceTask/ISubtask';
 import { addTask } from '../../../../../redux/slices/TaskSlice';
@@ -18,13 +18,15 @@ interface IAddTaskProps {
 
 const AddTask: FC<IAddTaskProps> = ({ taskType, setModal }) => {
 
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null); // використання useRef для доступу до textarea
+    const [showSubtasks, setShowSubtasks] = useState<boolean>(false);
+
     const [startDate, setStartDate] = useState<Date | null>(null);
     const [description, setDescription] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [subtasks, setSubtasks] = useState<ISubtask[]>([]);
     const [project, setProject] = useState<string>('');
     const [user, setUser] = useState<string>('');
-
     const dispatch = useAppDispatch()
 
     const userId = useAppSelector(user => user.auth.user?._id)
@@ -45,14 +47,26 @@ const AddTask: FC<IAddTaskProps> = ({ taskType, setModal }) => {
         dispatch(addTask({ author: user, description, project, title, date, subtasks, type: 'todo' }));
     }
 
+    const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
+        setDescription(e.target.value);
+        if (textareaRef.current) {
+            textareaRef.current.style.height = 'auto'; // Скидає висоту перед налаштуванням
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Встановлює нову висоту
+        }
+    };
+
+    const handleShowSubtasks = (): void => {
+        setShowSubtasks(!showSubtasks)
+    }
+
     return (
         <div className='add__task'>
             <section className='add__task__block'>
                 <span className='add__task__block__exit' onClick={() => setModal(false)}></span>
                 <article className='add__task__block__header'>
                     <div className='add__task__block__header__filters'>
-                        <FilterItem />
-                        <FilterItem />
+                        <FilterItem  filter={'frontEnd'}/>
+                        <FilterItem  filter={'frontEnd'}/>
                         <button className='add__task__block__header__filters__add'>+</button>
                     </div>
                     <div className='add__task__block__header__date'>
@@ -68,9 +82,32 @@ const AddTask: FC<IAddTaskProps> = ({ taskType, setModal }) => {
                 </article>
                 <article className='add__task__block__form'>
                     <input onChange={(e) => setTitle(e.target.value)} value={title} type="text" placeholder='Task name' className='add__task__block__form__title' />
-                    <textarea onChange={(e) => setDescription(e.target.value)} value={description} className='add__task__block__form__description' placeholder="Description" />
+                    <textarea
+                        ref={textareaRef}
+                        onChange={(e) => handleDescriptionChange(e)}
+                        value={description}
+                        className='add__task__block__form__description'
+                        placeholder="Description"
+                    />
                 </article>
-                <SubtaskBlock setSubtasks={setSubtasks} subtasks={subtasks} />
+                <div className='add__task__block__show-subtasks'>
+                    <input
+                        id='showSubtasks'
+                        className='add__task__block__show-subtasks__checkbox'
+                        type='checkbox'
+                        onChange={handleShowSubtasks}
+                        checked={showSubtasks} />
+                    <label
+                        htmlFor="showSubtasks"
+                        className='add__task__block__show-subtasks__text'
+                    >
+                        Subtasks
+                    </label>
+                </div>
+                {
+                    showSubtasks && <SubtaskBlock setSubtasks={setSubtasks} subtasks={subtasks} showCheckbox={false} />
+
+                }
                 <article className='add__task__block__files'></article>
                 <button className='add__task__block__submit' onClick={submitAddTask}>Submit</button>
             </section>

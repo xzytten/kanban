@@ -1,23 +1,25 @@
 import Filter from '../models/Filter.js';
 import Project from '../models/Project.js';
 
-export const postRole = async (req, res) => {
+export const postFilter = async (req, res) => {
     try {
-        const { color, name } = req.body;
+        const { filter, projectId } = req.body;
 
         const newFilter = new Filter({
-            color,
-            name,
+            name: filter.name,
+            backgroundColor: filter.backgroundColor,
+            textColor: filter.textColor,
+            project: projectId
         });
 
-        const projectId = req.body.projectId;
+        console.log("newFilter", newFilter)
         if (projectId) {
             await newFilter.save();
 
             await Project.findByIdAndUpdate(projectId, { $push: { filter: newFilter._id } }, { new: true });
 
             res.json({
-                newFilter,
+                filter: newFilter,
                 message: "Filter added"
             });
 
@@ -34,16 +36,22 @@ export const postRole = async (req, res) => {
 };
 
 
-export const getAllRole = async (req, res) => {
+export const getAllFilter = async (req, res) => {
     try {
-        const { taskId } = req.body;
+        const { projectId } = req.params;
+        const project = await Project.findById(projectId)
+        const filterIds = project.filter;
 
-        const filters = await Filter.find({ taskId });
+        const filters = await Filter.find({
+            _id: { $in: filterIds }
+        });
 
-        res.json({ filters })
-    } catch (error) {
         res.json({
-            meassage: 'error'
-        })
+            filters,
+            message: 'seccessful'
+        });
+
+    } catch (error) {
+        res.status(500).json({ message: "Server error" });
     }
 }

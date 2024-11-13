@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import FilterItem from '../../../../Filter/FilterItem'
+import FilterItem from '../../../Filter/FilterItem'
 import AllSubtask from '../../SubtaskBlock/AllSubtask';
 import GroupMembers from '../../../../GroupMembers/GroupMembers';
 import { ITask } from '../../../../../types/ITask';
@@ -17,7 +17,7 @@ const ViewTask: FC<IViewTaskProps> = ({ toggleModal, task }) => {
         <div className='view__task'>
             <section className='view__task__block'>
                 <article className='view__task__block__header'>
-                <FilterItem  filter={'frontEnd'}/>
+                <FilterItem  name={'frontEnd'} backgroundColor="" textColor=''/>
                 <GroupMembers />
                 </article>
                 <span className='view__task__block__exit' onClick={toggleModal}></span>

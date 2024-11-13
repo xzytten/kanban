@@ -1,11 +1,10 @@
 import { Router } from 'express';
-import { postRole, getAllRole } from '../controllers/filter.js';
+import { postFilter, getAllFilter } from '../controllers/filter.js';
 const filterRouter = new Router();
 
 //GET
-//http://localhost:3002/api/task/rolePost
-filterRouter.post('/postRole', postRole);
-
-filterRouter.get('/getAllRole', getAllRole);
+//http://localhost:3002/api/filter/postFilter
+filterRouter.post('/postFilter', postFilter);
+filterRouter.get('/getAllFilter/:projectId', getAllFilter);
 
 export default filterRouter;

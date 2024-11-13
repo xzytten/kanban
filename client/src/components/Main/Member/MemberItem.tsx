@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import FilterItem from '../../Filter/FilterItem';
+import FilterItem from '../Filter/FilterItem';
 
 import '../../../scss/member/member_item.scss';
 import { IMember } from '../../../types/IMember';
@@ -13,13 +13,13 @@ const MemberItem: FC<IMemberItem> = ({member}) => {
         <section className='main__members__item'>
             <figure className='main__members__item__profile'>
                 <div className='main__members__item__profile__block'>
-                    <div className='main__members__item__profile__block__round'>
+                    <div className='main__memFbers__item__profile__block__round'>
                         <img src={require("../../../img/member1.png")} alt="" className='main__members__item__profile__block__round__img' />
                     </div>
                     <div className='main__members__item__profile__block__info'>
                         <figcaption className='main__members__item__profile__block__info__name'>{member.userName}</figcaption>
-                        <FilterItem  filter={'frontEnd'}/>
-                    </div>
+                        <FilterItem  name={'frontEnd'} backgroundColor="" textColor=''/>
+                        </div>
                 </div>
                 <span className='main__members__item__profile__edit'></span>
             </figure>

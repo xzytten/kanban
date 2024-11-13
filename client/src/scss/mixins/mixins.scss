@@ -1,3 +1,4 @@
+
 //background
 @mixin background ($img, $width, $height) {
     display: inline-block;
@@ -140,7 +141,7 @@
     background: url('../../img/exit.jpg');
     background-size: 100%;
     cursor: pointer;
-
+    
     &:hover {
         transform: scale(1.1);
     }

@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { ITask } from '../../types/ITask';
 import axios from '../../utils/axios'
 
-interface IInitialState {
+interface ITaskState {
     tasks: ITask[],
     task: ITask | null,
     status: string,
@@ -11,7 +11,7 @@ interface IInitialState {
     editTypeStatus: string,
 }
 
-const initialState: IInitialState = {
+const initialState: ITaskState = {
     tasks: [],
     task: null,
     status: '',
@@ -83,7 +83,7 @@ const taskSlice = createSlice({
             .addCase(addTask.pending, (state) => {
                 state.status = 'pending'
             })
-            .addCase(addTask.fulfilled, (state, action: PayloadAction<IInitialState>) => {
+            .addCase(addTask.fulfilled, (state, action: PayloadAction<ITaskState>) => {
                 state.task = action.payload.task;
                 if (action.payload.task !== null) {
                     state.tasks.push(action.payload.task);
@@ -98,7 +98,7 @@ const taskSlice = createSlice({
             .addCase(getAllTask.pending, (state) => {
                 state.status = 'pending'
             })
-            .addCase(getAllTask.fulfilled, (state, action: PayloadAction<IInitialState>) => {
+            .addCase(getAllTask.fulfilled, (state, action: PayloadAction<ITaskState>) => {
                 state.tasks = action.payload.tasks;
                 state.status = "fulfilled";
             })

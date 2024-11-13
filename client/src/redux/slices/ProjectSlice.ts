@@ -4,7 +4,7 @@ import { IProject } from '../../types/IProject';
 import axios from '../../utils/axios'
 import { IUser } from '../../types/IAuth';
 
-interface ProjectState {
+interface IProjectState {
     projects: IProject[],
     project: IProject | null,
     projectIds: string[],
@@ -16,7 +16,7 @@ interface ProjectState {
     addProjectStatus: string
 }
 
-const initialState: ProjectState = {
+const initialState: IProjectState = {
     projects: [],
     project: null,
     projectIds: [],
@@ -45,7 +45,6 @@ export const getProjects = createAsyncThunk(
     async (userId: string) => {
         try {
             const { data } = await axios.get(`project/getProjects/${userId}`);
-
             return data;
         } catch (error) {
             throw (error)
@@ -99,7 +98,7 @@ const projectSlice = createSlice({
             .addCase(getProjects.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(getProjects.fulfilled, (state, action: PayloadAction<ProjectState>) => {
+            .addCase(getProjects.fulfilled, (state, action: PayloadAction<IProjectState>) => {
                 state.projects = action.payload?.projects;
                 state.status = 'fullfiled';
             })
@@ -109,7 +108,7 @@ const projectSlice = createSlice({
             .addCase(addProject.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(addProject.fulfilled, (state, action: PayloadAction<ProjectState>) => {
+            .addCase(addProject.fulfilled, (state, action: PayloadAction<IProjectState>) => {
                 if (action.payload.project) {
                     state.projects.push(action.payload.project);
                 }
@@ -120,7 +119,7 @@ const projectSlice = createSlice({
             .addCase(getProjectInvite.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(getProjectInvite.fulfilled, (state, action: PayloadAction<ProjectState>) => {
+            .addCase(getProjectInvite.fulfilled, (state, action: PayloadAction<IProjectState>) => {
                 if (action.payload.project !== null) {
                     state.inviteProject = action.payload.project;
                     state.message = action.payload.message;
@@ -134,7 +133,7 @@ const projectSlice = createSlice({
             .addCase(addProjectInvite.pending, (state) => {
                 state.addProjectStatus = 'pending';
             })
-            .addCase(addProjectInvite.fulfilled, (state, action: PayloadAction<ProjectState>) => {
+            .addCase(addProjectInvite.fulfilled, (state, action: PayloadAction<IProjectState>) => {
                 console.log(action.payload.project)
                 if (action.payload.project) {
                     localStorage.setItem('chosenProject', JSON.stringify(action.payload.project))

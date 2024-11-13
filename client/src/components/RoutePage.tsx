@@ -33,7 +33,6 @@ const RoutePage: FC = () => {
 
     return (
         <Router>
-
             {
                 pageStatus === 'pending' ? (
                     <div></div>

@@ -26,6 +26,9 @@ const TaskBlock: React.FC<ITaskBlockProps> = React.memo(({ activeColumn, handleD
         setActiveColumn(filter)
         console.log('enter')
     } 
+
+    //get all filters
+    
     return (
         <article
             className={`${activeClass ? activeClass : 'task__class'} ${activeColumn === filter ? 'activeColumn' : ''}`}

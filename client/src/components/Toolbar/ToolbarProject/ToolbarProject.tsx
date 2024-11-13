@@ -7,6 +7,7 @@ import ToolbarProjectItem from './ToolbarProjectItem';
 import AddButton from '../../Main/Task/Utils/AddButton';
 
 import '../../../scss/toolbar/toolbar_project.scss'
+import { getAllFilter } from '../../../redux/slices/FilterSlice';
 
 const ToolbarProject: FC = () => {
     const [userProjects, setUserProjects] = useState<IProject[]>([])
@@ -21,7 +22,9 @@ const ToolbarProject: FC = () => {
         const project = localStorage.getItem('chosenProject');
 
         if (project) {
-            dispatch(chooseProject(JSON.parse(project)))
+            const thisProject = JSON.parse(project);
+            dispatch(chooseProject(thisProject));
+            dispatch(getAllFilter(thisProject._id))
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
@@ -59,7 +62,7 @@ const ToolbarProject: FC = () => {
             </section>
             <AddButton name='Add Project' />
         </div>
-    );
+    );  
 };
 
 export default ToolbarProject;

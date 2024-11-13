@@ -18,9 +18,9 @@ const Project = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Task'
     }],
-    role: [{
+    filter: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Role'
+        ref: 'Filter'
     }],
     inviteUrl: [{
         type: String,

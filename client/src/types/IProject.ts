@@ -5,5 +5,5 @@ export interface IProject {
     inviteUrl: string,
     member: [],
     task: [],
-    role: [],
+    filter: [],
 }

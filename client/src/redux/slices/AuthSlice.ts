@@ -3,7 +3,7 @@ import { IUser } from '../../types/IAuth';
 
 import axios from '../../utils/axios'
 
-interface UserState {
+interface IUserState {
     user: IUser | null,
     token: string,
     status: string,
@@ -11,10 +11,10 @@ interface UserState {
 }
 
 interface RootState {
-    auth: UserState;
+    auth: IUserState;
 }
 
-const initialState: UserState = {
+const initialState: IUserState = {
     user: null,
     token: "",
     status: "",
@@ -88,7 +88,7 @@ const authSlice = createSlice({
             .addCase(register.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(register.fulfilled, (state, action: PayloadAction<UserState>) => {
+            .addCase(register.fulfilled, (state, action: PayloadAction<IUserState>) => {
                 state.user = action.payload.user;
                 state.token = action.payload.token;
                 state.status = 'fulfilled';
@@ -100,7 +100,7 @@ const authSlice = createSlice({
             .addCase(login.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(login.fulfilled, (state, action: PayloadAction<UserState>) => {
+            .addCase(login.fulfilled, (state, action: PayloadAction<IUserState>) => {
                 state.user = action.payload.user;
                 state.token = action.payload.token;
                 state.status = 'fulfilled';
@@ -113,7 +113,7 @@ const authSlice = createSlice({
             .addCase(getMe.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(getMe.fulfilled, (state, action: PayloadAction<UserState>) => {
+            .addCase(getMe.fulfilled, (state, action: PayloadAction<IUserState>) => {
                 state.user = action.payload?.user;
                 state.token = action.payload?.token;
                 state.status = 'fulfilled';

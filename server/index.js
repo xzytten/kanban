@@ -24,7 +24,7 @@ app.use(express.json());
 //Routes
 app.use('/api/task', taskRouter)
 app.use('/api/subtask', subtaskRouter)
-// app.use('/api/role', roleRouter);
+app.use('/api/filter', filterRouter);
 app.use('/api/member', memberRouter);
 app.use('/api/project', projectRouter);
 app.use('/api/user', userRouter);

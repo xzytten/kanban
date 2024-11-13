@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from 'react';
 
 import GroupMembers from '../../../../GroupMembers/GroupMembers';
-import FilterItem from '../../../../Filter/FilterItem';
+import FilterItem from '../../../Filter/FilterItem';
 import ViewTask from './ViewTask';
 import TaskEditButton from '../EditTask/TaskEditButton';
 
@@ -64,8 +64,8 @@ const TaskItem: FC<ITaskItemProps> = ({ setDraggedItem, task, filter, deleteItem
             {editButton ? <TaskEditButton task={task} deleteItem={() => deleteOneItem(task._id)} /> : null}
             {viewTask && <ViewTask task={task} toggleModal={toggleModal} />}
             <div className='task__item__header'>
-                <FilterItem filter={'Frontend'}/>
-                <span className='task__item__header__edit' onClick={toggleEditButton}></span>
+            <FilterItem  name={'frontEnd'} backgroundColor="" textColor=''/>
+            <span className='task__item__header__edit' onClick={toggleEditButton}></span>
             </div>
             <div className='task__item__block'>
                 <h3 className='task__item__block__name' onClick={toggleModal}>{task.title}</h3>

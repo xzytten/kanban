@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 
-import FilterItem from '../../../../Filter/FilterItem';
+import FilterItem from '../../../Filter/FilterItem';
 import DatePicker from 'react-datepicker';
 import SubtaskBlock from '../../SubtaskBlock/SubtaskBlock';
 import { ISubtask } from '../../interfaceTask/ISubtask';
@@ -41,7 +41,7 @@ const EditTask: FC<IEditTaskProps> = ({ task, toggleModal }) => {
                 <span className='add__task__block__exit' onClick={(toggleModal)}></span>
                 <article className='add__task__block__header'>
                     <div className='add__task__block__header__filters'>
-                    <FilterItem  filter={'frontEnd'}/>
+                    <FilterItem  name={'frontEnd'} backgroundColor="" textColor=''/>
                     <button className='add__task__block__header__filters__add'>+</button>
                     </div>
                     <div className='add__task__block__header__date'>

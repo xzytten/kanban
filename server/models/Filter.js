@@ -5,9 +5,17 @@ const Filter = new mongoose.Schema({
         type: String,
         required: true,
     },
-    color: {
+    backgroundColor: {
         type: String,
         required: true,
+    },
+    textColor: {
+        type: String,
+        required: true,
+    },
+    project: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Project'
     }
 },)
 

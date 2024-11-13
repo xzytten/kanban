@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks/hook'
 import { ISubtask } from '../../interfaceTask/ISubtask';
 import { addTask } from '../../../../../redux/slices/TaskSlice';
 
-import FilterItem from '../../../../Filter/FilterItem';
+import FilterItem from '../../../Filter/FilterItem';
 import DatePicker from 'react-datepicker';
 import SubtaskBlock from '../../SubtaskBlock/SubtaskBlock';
 
@@ -65,9 +65,8 @@ const AddTask: FC<IAddTaskProps> = ({ taskType, setModal }) => {
                 <span className='add__task__block__exit' onClick={() => setModal(false)}></span>
                 <article className='add__task__block__header'>
                     <div className='add__task__block__header__filters'>
-                        <FilterItem  filter={'frontEnd'}/>
-                        <FilterItem  filter={'frontEnd'}/>
-                        <button className='add__task__block__header__filters__add'>+</button>
+                    <FilterItem  name={'frontEnd'} backgroundColor="" textColor=''/>
+                    <button className='add__task__block__header__filters__add'>+</button>
                     </div>
                     <div className='add__task__block__header__date'>
                         <DatePicker

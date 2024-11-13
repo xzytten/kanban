@@ -3,16 +3,16 @@ import { IMember } from '../../types/IMember';
 
 import axios from '../../utils/axios'
 
-interface IInitialState {
+interface IMemberState {
     member: IMember[],
     status: string ,
 }
 
 interface RootState {
-    auth: IInitialState;
+    auth: IMemberState;
 }
 
-const initialState: IInitialState = {
+const initialState: IMemberState = {
     member: [],
     status: ''
 }
@@ -41,7 +41,7 @@ const memberSlice = createSlice({
             .addCase(getMember.pending, (state) => {
                 state.status = 'pending';
             })
-            .addCase(getMember.fulfilled, (state, action: PayloadAction<IInitialState>) => {
+            .addCase(getMember.fulfilled, (state, action: PayloadAction<IMemberState>) => {
                 state.status = 'fullfiled';
                 state.member = action.payload?.member;
             })

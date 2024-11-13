@@ -1,0 +1,47 @@
+.all-filter {
+    margin: 0 auto;
+    margin-top: 40px;
+    width: auto;
+    max-width: 70%;
+
+    &__block {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+
+        &__item {
+            list-style: none;
+        }
+
+    }
+
+    &__add-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // flex-wrap: wrap;
+        gap: 4px;
+        font-size: 16px;
+        height: 40px;
+        border-radius: 20px;
+        border: none;
+        color: rgb(0, 0, 0, 40%);
+        width: auto;
+        padding: 0px 30px;
+        
+        &:hover{
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+
+        &__pluse{
+            font-size: 20px;
+            color:  rgb(113, 113, 113);
+ 
+        }
+        &__title{
+            font-size: 20px;
+            color:  rgb(113, 113, 113);
+        }
+    }
+}

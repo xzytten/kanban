@@ -1,5 +1,6 @@
 export interface IFilter {
-    _id: string, 
+    _id?: string, 
     name: string,
-    color: string,
+    backgroundColor: string,
+    textColor: string,
 }

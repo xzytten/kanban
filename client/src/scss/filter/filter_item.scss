@@ -1,13 +1,29 @@
-.role {
+.filter {
     border-radius: 10px;
-    display: inline-block;
     padding: 0px 8px;
     height: 22px;
     background-color: rgba(158, 16, 245, 25%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &__name {
         font-size: 14px;
         color: rgba(158, 16, 245, 100%);;
         line-height: 22px
     }
+}
+
+.filter.allfilter{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    height: 40px;
+    padding: 0px 30px;
+    width: auto;
+    background-color: rgba(158, 16, 245, 25%);
+}
+.filter__name.allfilter{
+    font-size: 18px;
 }

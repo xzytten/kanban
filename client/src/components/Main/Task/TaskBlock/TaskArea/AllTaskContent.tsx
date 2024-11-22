@@ -33,7 +33,7 @@ const AllTaskContent: FC = () => {
     const project = useAppSelector(state => state.project.project);
     const [taskClass, setTaskClass] = useState('all');
     const [tasks, setTasks] = useState<ITask[]>([]);
-
+    console.log(tasks)
     const [draggedItem, setDraggedItem] = useState<ITask | null>(null);
     const [activeColumn, setActiveColumn] = useState<string>('');
 

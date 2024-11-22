@@ -1,6 +1,6 @@
 import Task from '../models/Task.js';
 import Project from '../models/Project.js';
-
+import Filter from '../models/Filter.js';
 //postTask
 export const addTask = async (req, res) => {
     try {
@@ -95,7 +95,7 @@ export const editTypeTask = async (req, res) => {
 
         }
 
-        return res.json({ task, message: "Update successfuly" });
+        return res.json({ taskId, type, message: "Update successfuly" });
     } catch (error) {
         res.status(500).json({
             message: 'Error updating task'
@@ -110,11 +110,26 @@ export const getAllTask = async (req, res) => {
         const { projectId } = req.body;
 
         const project = await Project.findById(projectId);
+        if (!project) {
+            return res.status(404).json({ message: "Проект не знайдено" });
+        }
+
         const tasks = await Task.find({ _id: { $in: project.task } });
 
-        res.status(200).json({
-            tasks
-        });
+        const filters = await Filter.find({ _id: { $in: tasks.flatMap(task => task.filters) } });
+
+        const filterMap = filters.reduce((map, filter) => {
+            map[filter._id] = filter;
+            return map;
+        }, {});
+
+        const tasksWithFilters = tasks.map(task => ({
+            ...task._doc,
+            filters: task.filters.map(filterId => filterMap[filterId])
+        }));
+        console.log(tasksWithFilters)
+
+        res.status(200).json({ tasks: tasksWithFilters });
 
     } catch (error) {
         console.error('Error while getting tasks by IDs:', error);

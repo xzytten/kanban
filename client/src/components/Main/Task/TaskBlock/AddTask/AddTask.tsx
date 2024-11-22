@@ -44,7 +44,7 @@ const AddTask: FC<IAddTaskProps> = ({ taskType, setModal }) => {
 
     const submitAddTask = () => {
         const date = startDate || new Date();
-        dispatch(addTask({ author: user, description, project, title, date, subtasks, type: 'todo' }));
+        dispatch(addTask({ author: user, description, filters: [], project, title, date, subtasks, type: 'todo' }));
     }
 
     const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
@@ -65,8 +65,8 @@ const AddTask: FC<IAddTaskProps> = ({ taskType, setModal }) => {
                 <span className='add__task__block__exit' onClick={() => setModal(false)}></span>
                 <article className='add__task__block__header'>
                     <div className='add__task__block__header__filters'>
-                    <FilterItem  name={'frontEnd'} backgroundColor="" textColor=''/>
-                    <button className='add__task__block__header__filters__add'>+</button>
+                        {/* <FilterItem name={'frontEnd'} backgroundColor="" textColor='' /> */}
+                        <button className='add__task__block__header__filters__add'>+</button>
                     </div>
                     <div className='add__task__block__header__date'>
                         <DatePicker

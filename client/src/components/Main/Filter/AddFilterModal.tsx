@@ -6,11 +6,11 @@ import FilterItem from './FilterItem';
 
 import '../../../scss/filter/filter_add.scss'
 
-interface IAddFilter {
-    setAddFilter: React.Dispatch<React.SetStateAction<boolean>>
+interface IAddFilterModal {
+    setShowAddFilterModal: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-const AddFilter: FC<IAddFilter> = ({ setAddFilter }) => {
+const AddFilterModal: FC<IAddFilterModal> = ({ setShowAddFilterModal }) => {
 
     const { project } = useAppSelector(project => project.project)
     const [name, setName] = useState<string>('Filter Name');
@@ -32,18 +32,33 @@ const AddFilter: FC<IAddFilter> = ({ setAddFilter }) => {
             dispatch(postFilter({ filter, projectId: project._id }));
         }
 
+        setDefaultInputs();
+
+        setShowAddFilterModal(false)
+    };
+
+    const closeAddFilterModal = (e: React.MouseEvent<HTMLDivElement>) => {
+        e.stopPropagation();
+        setDefaultInputs();
+        setShowAddFilterModal(false)
+    }
+
+    const setDefaultInputs = () => {
         setName('Filter Name');
         setBackgroundColor('grey');
         setTextColor('white')
 
-        setAddFilter(false)
-    };
+    }
 
     return (
-        <div className='modal-background'>
+        <>
+            <div
+                className='modal-background'
+                onClick={(e) => { closeAddFilterModal(e) }}>
+            </div>
             <div className='addfilter'>
                 <h3 className='addfilter__title'>New Filter</h3>
-                <FilterItem name={name} backgroundColor={backgroundColor} textColor={textColor} type='allfilter' />
+                <FilterItem filter={{ name, backgroundColor, textColor }} type={'menu'} />
                 <form onSubmit={handleSubmit} className='addfilter__form'>
                     <label className='addfilter__form__name'>
                         Name
@@ -51,7 +66,7 @@ const AddFilter: FC<IAddFilter> = ({ setAddFilter }) => {
                             type="text"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
-                            placeholder="Введіть ім'я фільтра"
+                            placeholder="Filter Name"
                             className='addfilter__form__input addfilter__form__name__input'
                         />
                     </label>
@@ -67,7 +82,7 @@ const AddFilter: FC<IAddFilter> = ({ setAddFilter }) => {
                     </label>
 
                     <label className='addfilter__form__color'>
-                    <p className="addfilter__form__color__title">Text Color</p>
+                        <p className="addfilter__form__color__title">Text Color</p>
                         <input
                             type="color"
                             value={textColor}
@@ -84,8 +99,13 @@ const AddFilter: FC<IAddFilter> = ({ setAddFilter }) => {
                     </button>
                 </form>
             </div>
-        </div>
+        </>
+
+
+
+
+
     );
 };
 
-export default AddFilter;
+export default AddFilterModal;

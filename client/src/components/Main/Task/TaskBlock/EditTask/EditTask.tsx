@@ -41,7 +41,7 @@ const EditTask: FC<IEditTaskProps> = ({ task, toggleModal }) => {
                 <span className='add__task__block__exit' onClick={(toggleModal)}></span>
                 <article className='add__task__block__header'>
                     <div className='add__task__block__header__filters'>
-                    <FilterItem  name={'frontEnd'} backgroundColor="" textColor=''/>
+                    {/* <FilterItem  name={'frontEnd'} backgroundColor="" textColor=''/> */}
                     <button className='add__task__block__header__filters__add'>+</button>
                     </div>
                     <div className='add__task__block__header__date'>

@@ -1,25 +1,36 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
+
+import FilterInfo from './FilterInfo';
+import { IFilter } from '../../../types/IFilter';
 
 import '../../../scss/filter/filter_item.scss';
 
 interface IFilterItem {
-    name: string,
-    backgroundColor: string,
-    textColor: string,
+    filter: IFilter,
     type?: string,
+    borderColor?: string,
 }
-const FilterItem: FC<IFilterItem> = ({ name, backgroundColor, textColor, type }) => {
+const FilterItem: FC<IFilterItem> = ({ filter, type, borderColor }) => {
+    const [showFilterInfo, setShowFilterInfo] = useState<boolean>(false)
     return (
 
-        <article 
-        className={`filter ${type === 'allfilter' && 'allfilter'}`}
-        style={{ backgroundColor: backgroundColor }}
-        >
-            <p 
-            className={`filter__name ${type === 'allfilter' && 'allfilter'}`} 
-            style={{ color: textColor }}
-            >{name}</p>
-        </article>
+        <>
+            <article
+                className={`filter ${type === 'menu' && 'menu'}`}
+                style={{
+                    backgroundColor: filter.backgroundColor,
+                    border: borderColor && `3px solid ${borderColor}`,
+                }}
+                {...type === 'menu' && { onClick: () => setShowFilterInfo(true) }}
+            >
+                <p
+                    className={`filter__name ${type === 'menu' && 'menu'}`}
+                    style={{ color: filter.textColor }}
+                >{filter.name}</p>
+            </article >
+
+            {showFilterInfo && <FilterInfo setShowFilterInfo={setShowFilterInfo} filter={filter} />}
+        </>
 
     );
 };

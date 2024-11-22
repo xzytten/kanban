@@ -22,10 +22,9 @@ interface ITaskItemProps {
 const TaskItem: FC<ITaskItemProps> = ({ setDraggedItem, task, filter, deleteItem }) => {
 
     const dispatch = useAppDispatch();
-    
+    const [taskInfo, setTaskInfo] = useState<ITask>(task)
     const deleteStatus = useAppSelector(state => state.task.deleteStatus)
     const deletedTask = useAppSelector(state => state.task.deletedTask)
-
     const [viewTask, setViewTask] = useState<boolean>(false);
     const [editButton, setEditButton] = useState<boolean>(false);
 
@@ -56,25 +55,56 @@ const TaskItem: FC<ITaskItemProps> = ({ setDraggedItem, task, filter, deleteItem
         if (deletedTask && deleteStatus === "fulfilled") {
             deleteItem(deletedTask);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deleteStatus])
 
     return (
-        <article className='task__item' draggable onDragStart={() => handleDragStart(task)}>
-            {editButton ? <TaskEditButton task={task} deleteItem={() => deleteOneItem(task._id)} /> : null}
-            {viewTask && <ViewTask task={task} toggleModal={toggleModal} />}
+        <article className='task__item' draggable onDragStart={() => handleDragStart(taskInfo)}>
+            {editButton ? <TaskEditButton task={taskInfo} deleteItem={() => deleteOneItem(taskInfo._id)} /> : null}
+            {viewTask && <ViewTask setTaskInfo={setTaskInfo} task={taskInfo} toggleModal={toggleModal} />}
             <div className='task__item__header'>
-            <FilterItem  name={'frontEnd'} backgroundColor="" textColor=''/>
-            <span className='task__item__header__edit' onClick={toggleEditButton}></span>
+                <ul className='task__item__header__filters'>
+                    {taskInfo.filters.length > 2
+                        ?
+                        (<>
+
+                            <li key={taskInfo.filters[0]._id} className='task__item__header__filters__item'>
+                                <FilterItem filter={taskInfo.filters[0]}/>
+                            </li>
+                            <li key={taskInfo.filters[1]._id} className='task__item__header__filters__item'>
+                                <FilterItem filter={taskInfo.filters[1]}/>
+                            </li>
+
+                            <li className='task__item__header__filters__item'>
+                                <FilterItem filter={{backgroundColor:"grey",name:`+${taskInfo.filters.length - 2}`, textColor:'white'}} />
+                            </li>
+                        </>
+
+                        )
+                        :
+                        (<>
+                            {
+                                taskInfo.filters.map(filter => (
+                                    <li key={filter._id} className='task__item__header__filters__item'>
+                                        <FilterItem filter={filter} />
+                                    </li>
+                                ))
+                            }
+                        </>)
+
+
+                    }
+                </ul>
+                <span className='task__item__header__edit' onClick={toggleEditButton}></span>
             </div>
             <div className='task__item__block'>
-                <h3 className='task__item__block__name' onClick={toggleModal}>{task.title}</h3>
-                <p className='task__item__block__description'>{task.description.length > 20 ? task.description.slice(0, 30) + "..." : task.description}</p>
+                <h3 className='task__item__block__name' onClick={toggleModal}>{taskInfo.title}</h3>
+                <p className='task__item__block__description'>{taskInfo.description.length > 20 ? task.description.slice(0, 30) + "..." : taskInfo.description}</p>
                 <section className='task__item__block__info'>
-                    {task.subtasks && (
+                    {taskInfo.subtasks && (
                         <article className='task__item__block__info__done'>
                             <img src={require('../../../../../img/doneIco.jpg')} alt='done' className='task__item__block__info__done__ico' />
-                            <p className='task__item__block__info__done__info'>{task.subtasks.filter(item => item.status === true).length}/{task.subtasks.length}</p>
+                            <p className='task__item__block__info__done__info'>{taskInfo.subtasks.filter(item => item.status === true).length}/{taskInfo.subtasks.length}</p>
                         </article>
                     )}
                     <article className='task__item__block__info__date'>

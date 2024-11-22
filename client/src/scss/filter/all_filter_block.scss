@@ -1,0 +1,43 @@
+.all-filter__block {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 30px;
+    justify-content: space-between;
+    max-width: 100%;
+    margin: 0 auto; 
+
+    &__item {
+        list-style: none;
+    }
+
+}
+
+.all-filter__add-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    font-size: 16px;
+    height: 40px;
+    border-radius: 20px;
+    border: none;
+    color: rgb(0, 0, 0, 40%);
+    width: auto;
+    padding: 0px 30px;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.05);
+    }
+
+    &__pluse {
+        font-size: 20px;
+        color: rgb(113, 113, 113);
+
+    }
+
+    &__title {
+        font-size: 20px;
+        color: rgb(113, 113, 113);
+    }
+}

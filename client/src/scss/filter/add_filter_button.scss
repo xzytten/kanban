@@ -1,0 +1,53 @@
+.filter-add-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    color: rgb(0, 0, 0, 40%);
+    width: auto;
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+        transform: scale(1.1);
+    }
+
+}
+
+//menu
+.menu {
+    height: 40px;
+    border-radius: 20px;
+    color: rgb(0, 0, 0, 40%);
+    padding: 0px 30px;
+
+    .all-filter__add-button__pluse {
+        font-size: 20px;
+        color: rgb(113, 113, 113);
+
+    }
+
+    .all-filter__add-button__title {
+        font-size: 20px;
+        color: rgb(113, 113, 113);
+    }
+}
+
+//modal
+.modal {
+    height: 26px;
+    border-radius: 10px;
+    color: rgb(0, 0, 0, 40%);
+    padding: 0px 8px;
+    border: 3px solid rgba(255, 255, 255, 0);
+
+    .all-filter__add-button__pluse {
+        font-size: 16px;
+        color: rgb(113, 113, 113);
+    }
+    
+    .all-filter__add-button__title {
+        font-size: 16px;
+        color: rgb(113, 113, 113);
+    }
+}

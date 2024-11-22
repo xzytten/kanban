@@ -2,8 +2,11 @@
 @import '../mixins/colors.scss';
 
 .task__item {
-    width: 285px;
-    height: 285px;
+    max-width: 260px;
+    // max-height: 290px;
+    width: 100%;
+    height: auto;
+    padding: 0px 17px;
     display: flex;
     flex-direction: column;
     border: 1px solid $borderColor;
@@ -12,31 +15,44 @@
     background-color: white;
     margin: 0 auto;
     margin-bottom: 20px;
+
     &__header {
-        width: 250px;
+        max-width: 260px;
+        width: 100%;
         height: auto;
         margin: 0 auto;
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-top: 18px;
-        
+  
+
+        &__filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+
+            &__item {
+                list-style: none;
+            }
+        }
+
         &__edit {
             @include edit(0px, 18px, 10px);
             cursor: pointer;
 
-            &:hover{
+            &:hover {
                 transform: scale(1.05);
             }
         }
     }
 
     &__block {
-        width: 250px;
+        max-width: 260px;
+        width: 100%;
         display: flex;
         flex-direction: column;
         margin-top: 25px;
-        margin-left: 17px;
 
         &__name {
             font-size: 17px;
@@ -102,7 +118,8 @@
 
     &__extra {
         display: flex;
-        width: 256px;
+        max-width: 260px;
+        width: 100%;
         margin: 0 auto;
         margin-top: 8px;
         justify-content: space-between;

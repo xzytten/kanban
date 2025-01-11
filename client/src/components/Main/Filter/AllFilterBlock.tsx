@@ -13,23 +13,23 @@ interface IAllFiltersBlock {
 const AllFiltersBlock: FC<IAllFiltersBlock> = ({ type }) => {
 
     const [showAddFilterModal, setShowAddFilterModal] = useState<boolean>(false)
-
+    
     const filters = useAppSelector(filter => filter.filter.filters)
-
+        
     return (
         <ul className='all-filter__block'>
             {
                 filters.map(filter =>
-                            <li key={filter._id} className='all-filter__block__item'>
-                                <FilterItem filter={filter} type={type} />
-                            </li>
+                    <li key={filter._id} className='all-filter__block__item'>
+                        <FilterItem filter={filter} type={type} />
+                    </li>
                 )
             }
 
-                <AddFilterButton type={'menu'} setShowAddFilterModal={setShowAddFilterModal}/>
+            <AddFilterButton type={'menu'} setShowAddFilterModal={setShowAddFilterModal} />
 
 
-            {showAddFilterModal && <AddFilterModal setShowAddFilterModal={setShowAddFilterModal}/>}
+            {showAddFilterModal && <AddFilterModal setShowAddFilterModal={setShowAddFilterModal} />}
         </ul>
     )
 }

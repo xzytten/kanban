@@ -12,7 +12,7 @@ import InvitePage from './Main/InvitePage/InvitePage';
 
 const RoutePage: FC = () => {
     const [pageStatus, setPageStatus] = useState<string>('pending')
-
+    
     const dispatch = useAppDispatch();
 
     const isAuth = useAppSelector(checkIsAuth);

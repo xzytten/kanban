@@ -83,7 +83,6 @@ const projectSlice = createSlice({
     initialState,
     reducers: {
         chooseProject: (state, action: PayloadAction<IProject | null>) => {
-            console.log(action.payload)
             state.project = action.payload;
             // localStorage.setItem('chosenProject', JSON.stringify(action.payload))
         },
@@ -134,7 +133,6 @@ const projectSlice = createSlice({
                 state.addProjectStatus = 'pending';
             })
             .addCase(addProjectInvite.fulfilled, (state, action: PayloadAction<IProjectState>) => {
-                console.log(action.payload.project)
                 if (action.payload.project) {
                     localStorage.setItem('chosenProject', JSON.stringify(action.payload.project))
                     state.projects.push(action.payload.project);

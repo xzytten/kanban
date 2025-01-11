@@ -19,22 +19,25 @@ const AddFilterModal: FC<IAddFilterModal> = ({ setShowAddFilterModal }) => {
 
     const dispatch = useAppDispatch()
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        if (!name || !backgroundColor) {
+        if (!name || !backgroundColor || name.trim().length > 20) {
             return;
         }
+        try {
+            const filter: IFilter = { name, backgroundColor, textColor };
 
-        const filter: IFilter = { name, backgroundColor, textColor };
+            if (project) {
+                await dispatch(postFilter({ filter, projectId: project._id }));
+            }
 
-        if (project) {
-            dispatch(postFilter({ filter, projectId: project._id }));
+            setDefaultInputs();
+
+            setShowAddFilterModal(false)
+        } catch (error) {
+            console.log(error)
         }
-
-        setDefaultInputs();
-
-        setShowAddFilterModal(false)
     };
 
     const closeAddFilterModal = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -68,6 +71,7 @@ const AddFilterModal: FC<IAddFilterModal> = ({ setShowAddFilterModal }) => {
                             onChange={(e) => setName(e.target.value)}
                             placeholder="Filter Name"
                             className='addfilter__form__input addfilter__form__name__input'
+                            maxLength={20}
                         />
                     </label>
                     <label className='addfilter__form__color'>

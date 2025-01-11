@@ -1,0 +1,17 @@
+.add__filters__button {
+    border-radius: 10px;
+    border: none;
+    padding: 0px 26.8px;
+    font-size: 21px;
+    height: 26px;
+    background-color: rgb(221, 221, 221);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover{
+        transform: scale(1.03);
+        background-color: rgb(207, 207, 207);
+        cursor: pointer;
+    }
+}

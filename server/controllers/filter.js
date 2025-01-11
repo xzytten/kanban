@@ -87,12 +87,9 @@ export const removeFilterFromTask = async (req, res) => {
         if (!task) {
             return res.status(404).json({ message: "Task not found" });
         }
-        console.log(filterId)
         const filterObjectId = new mongoose.Types.ObjectId(filterId);
-        console.log('filterObjectId:', filterObjectId);
 
         const updatedFilters = task.filters.filter(f => !f.equals(filterObjectId));
-        console.log('updatedFilters:', updatedFilters);
 
         task.filters = updatedFilters;
         await task.save();
@@ -108,8 +105,6 @@ export const removeFilterFromTask = async (req, res) => {
 export const ChangeFilter = async (req, res) => {
     try {
         const { changedFilter, _id } = req.body;
-
-        console.log(changedFilter, _id)
 
         const filter = await Filter.findById(_id);
 
@@ -134,7 +129,6 @@ export const ChangeFilter = async (req, res) => {
 export const DeleteFilter = async (req, res) => {
     try {
         const { filterId, projectId } = req.params;
-        console.log(filterId, projectId);
 
         const project = await Project.findById(projectId);
 
@@ -162,6 +156,7 @@ export const DeleteFilter = async (req, res) => {
         }
 
         await Filter.findByIdAndDelete(filterId);
+
         res.status(200).json({ deletedFilterId: filterId });
 
 

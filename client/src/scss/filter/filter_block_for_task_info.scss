@@ -1,0 +1,10 @@
+.filters__block {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+
+    &__li {
+        list-style: none;
+    }
+}

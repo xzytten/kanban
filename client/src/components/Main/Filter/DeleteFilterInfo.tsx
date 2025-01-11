@@ -1,8 +1,9 @@
 import React, { FC } from 'react';
-import { IFilter } from '../../../types/IFilter';
 import FilterItem from './FilterItem';
+import { IFilter } from '../../../types/IFilter';
 import { deleteFilter } from '../../../redux/slices/FilterSlice';
-import { useAppDispatch, useAppSelector } from '../../../redux/hooks/hook';
+import { deleteFilterInTasks } from '../../../redux/slices/TaskSlice';
+import { useAppDispatch } from '../../../redux/hooks/hook';
 
 import '../../../scss/filter/delete_filter_info.scss'
 
@@ -17,9 +18,11 @@ const DeleteFilterInfo: FC<IDeleteFitlerInfo> = ({ filter, setShowDeleteFilterIn
 
     const deleteThisFilter = async (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         try {
-            if (filter.project && filter._id)
+            if (filter.project && filter._id) {
                 await dispatch(deleteFilter({ projectId: filter.project, filterId: filter._id }))
+                dispatch(deleteFilterInTasks({ filterId: filter._id }))
                 setShowDeleteFilterInfo(false)
+            }
         } catch (error) {
             console.log(error)
         }

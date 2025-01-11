@@ -36,8 +36,6 @@ export const addProject = async (req, res) => {
 
         // const encryptedToken = encrypt(inviteToken);
 
-        // console.log('i',inviteToken)
-        // console.log(encryptedToken);
 
         res.json({
             project: {

@@ -1,12 +1,11 @@
 import { FC, useState } from 'react';
-
-import FilterItem from '../../../Filter/FilterItem'
-import AllSubtask from '../../SubtaskBlock/AllSubtask';
 import { ITask } from '../../../../../types/ITask';
-import { IFilter } from '../../../../../types/IFilter';
+
+import AllSubtask from '../../SubtaskBlock/AllSubtask';
+import AllFilterModal from '../../../Filter/AllFilterModal';
+import FilterBlockForTaskInfo from '../../../Filter/FilterBlockForTaskInfo';
 
 import '../../../../../scss/task/view_task.scss';
-import AllFilterModal from '../../../Filter/AllFilterModal';
 
 interface IViewTaskProps {
     task: ITask,
@@ -18,26 +17,15 @@ interface IViewTaskProps {
 const ViewTask: FC<IViewTaskProps> = ({ toggleModal, task, setTaskInfo }) => {
 
     const [showAllFilters, setShowAllFilters] = useState<boolean>(false)
-
+    
+    console.log(task)
     return (
         <>
-            {showAllFilters && <AllFilterModal task={task} setTaskInfo={setTaskInfo} taskFilters={task.filters} setShowAllFilters={setShowAllFilters} taskId={task._id} />}
+            {showAllFilters && <AllFilterModal task={task} setTaskInfo={setTaskInfo} taskFilters={task.filters} setShowAllFilters={setShowAllFilters} />}
             <div className='view__task'>
                 <section className='view__task__block'>
                     <article className='view__task__block__header'>
-                        <ul className='view__task__block__header__filters'>
-                            {task.filters.map(taskFilter => (
-                                <li key={taskFilter._id} className='view__task__block__header__filters__item'>
-                                    <FilterItem filter={taskFilter} />
-                                </li>
-                            ))}
-                            <button
-                                onClick={() => setShowAllFilters(true)}
-                                className='view__task__block__header__filters__add-filter'
-                            >
-                                +
-                            </button>
-                        </ul>
+                        <FilterBlockForTaskInfo filters={task.filters} setShowAllFilters={setShowAllFilters} />
                     </article>
                     <span className='view__task__block__exit' onClick={toggleModal}></span>
                     <h2 className='view__task__block__title'>{task.title}</h2>

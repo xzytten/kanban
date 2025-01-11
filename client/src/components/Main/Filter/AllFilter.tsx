@@ -12,9 +12,6 @@ const AllFilter: FC = () => {
 
     const filters = useAppSelector(filter => filter.filter.filters)
 
-    useEffect(() => {
-        console.log(filters)
-    }, [filters])
     return (
 
         <div className="all-filter">

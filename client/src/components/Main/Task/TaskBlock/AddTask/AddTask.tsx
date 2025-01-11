@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from '../../../../../redux/hooks/hook'
 import { ISubtask } from '../../interfaceTask/ISubtask';
 import { addTask } from '../../../../../redux/slices/TaskSlice';
 
-import FilterItem from '../../../Filter/FilterItem';
 import DatePicker from 'react-datepicker';
 import SubtaskBlock from '../../SubtaskBlock/SubtaskBlock';
 

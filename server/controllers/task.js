@@ -4,7 +4,6 @@ import Filter from '../models/Filter.js';
 //postTask
 export const addTask = async (req, res) => {
     try {
-        console.log('Add Task - ', req.body)
         const { project, title, description, type, filters, subtasks, date, author } = req.body;
 
         if (project) {
@@ -127,12 +126,35 @@ export const getAllTask = async (req, res) => {
             ...task._doc,
             filters: task.filters.map(filterId => filterMap[filterId])
         }));
-        console.log(tasksWithFilters)
 
         res.status(200).json({ tasks: tasksWithFilters });
 
     } catch (error) {
         console.error('Error while getting tasks by IDs:', error);
+        res.status(500).json({ message: 'Error, something went wrong' });
+    }
+}
+
+export const editTask = async (req, res) => {
+    try {
+        const { taskId, updates } = req.body;
+        console.log(updates)
+        if (!taskId || !updates || typeof updates !== 'object') {
+            return res.status(400).json({ message: "Invalid request data" });
+        }
+
+        const updatedTask = await Task.findByIdAndUpdate(
+            taskId,
+            { $set: updates },
+            { new: true }
+        );
+
+        if (!updatedTask) {
+            return res.status(404).json({ message: "Task not found"});
+        }
+
+        res.status(200).json({ message: "Task updated successfully", updatedTask });
+    } catch (error) {
         res.status(500).json({ message: 'Error, something went wrong' });
     }
 }

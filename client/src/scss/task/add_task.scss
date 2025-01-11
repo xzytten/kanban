@@ -9,11 +9,11 @@
     width: 100%;
     height: 100%;
     overflow: hidden;
-    z-index: 10000;
+    z-index: 1003;
 
 
     &__block {
-        z-index: 10000;
+        z-index: 1004;
         background-color: white;
         border-radius: 10px;
         position: fixed;
@@ -81,7 +81,7 @@
                     border-bottom: 1px solid $borderColor;
                     width: 140px;
                     text-align: center;
-                    color: rgb(0, 0, 0, 40%);
+                    color: rgba(0, 0, 0, 0.80);
                     cursor: pointer;
 
                     &:focus {
@@ -108,7 +108,7 @@
             &__filters {
                 display: flex;
                 gap: 10px;
-
+                list-style: none;
                 &__add {
                     font-size: 20px;
                     width: 80px;
@@ -131,11 +131,8 @@
             gap: 28px;
 
             &__title {
-                height: 50px;
-                font-size: 18px;
-                padding-left: 36px;
-                border: 1px solid $borderColor;
-                border-radius: 10px;
+                @include textarea;
+                height: auto;
 
                 &:focus {
                     border: 1px solid $borderColor;
@@ -146,6 +143,7 @@
             &__description {
 
                 @include textarea;
+                height: auto;
 
                 &:focus {
                     border: 1px solid $borderColor;

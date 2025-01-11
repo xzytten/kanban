@@ -92,7 +92,21 @@ export const removeFilterFromTask = createAsyncThunk(
     async (params: { filterId: string, taskId: string }) => {
         try {
             const { data } = await axios.post('filter/removeFilterFromTask', params);
-            
+
+            return data;
+        } catch (error) {
+            throw (error)
+        }
+    }
+)
+
+
+export const editTask = createAsyncThunk(
+    'task/editTask',
+    async (params: { taskId: string, updates: Partial<Omit<ITask, 'filters'> & { filters: string[] }> }) => {
+        try {                                                                                                                                                                                       
+            const { data } = await axios.put('task/editTask', params);
+
             return data;
         } catch (error) {
             throw (error)
@@ -118,6 +132,14 @@ const taskSlice = createSlice({
             //             task
             //     )
             // }
+        },
+        deleteFilterInTasks: (state, action: PayloadAction<{ filterId: string }>) => {
+            if (state.tasks && action.payload.filterId) {
+                state.tasks = state.tasks.map(task => ({
+                    ...task,
+                    filters: task.filters.filter(filter => filter._id !== action.payload.filterId && filter),
+                }));
+            }
         }
     },
     extraReducers: (builder) => {
@@ -214,8 +236,23 @@ const taskSlice = createSlice({
                 state.editTypeStatus = 'rejected'
             })
 
+            //editTask
+            .addCase(editTask.pending, (state) => {
+                state.editTypeStatus = "pending";
+            })
+            .addCase(editTask.fulfilled, (state, action) => {
+                state.editTypeStatus = 'fulfilled'
+                const taskIndex = state.tasks.findIndex((task) => task._id === action.payload.updatedTask._id);
+                if (taskIndex !== -1) {
+                    state.tasks[taskIndex] = action.payload.updatedTask;
+                }
+            })
+            .addCase(editTask.rejected, (state) => {
+                state.editTypeStatus = 'rejected'
+            })
+
     }
 })
 
 export const { reducer } = taskSlice;
-export const { pushFilterIdToTask } = taskSlice.actions;
+export const { pushFilterIdToTask, deleteFilterInTasks } = taskSlice.actions;

@@ -33,7 +33,6 @@ const AllTaskContent: FC = () => {
     const project = useAppSelector(state => state.project.project);
     const [taskClass, setTaskClass] = useState('all');
     const [tasks, setTasks] = useState<ITask[]>([]);
-    console.log(tasks)
     const [draggedItem, setDraggedItem] = useState<ITask | null>(null);
     const [activeColumn, setActiveColumn] = useState<string>('');
 
@@ -106,15 +105,14 @@ const AllTaskContent: FC = () => {
             }
         });
 
-        console.log('distributeTasks', tasks)
         setTask(tempTasks);
     };
 
     useEffect(() => {
-        if (project) {
+        if (reduxTasks.length === 0 && project) {
             dispatch(getAllTask({ projectId: project._id }));
         }
-    }, [project, dispatch]);
+    }, [project, reduxTasks, dispatch]);
 
     useEffect(() => {
         setTasks(reduxTasks);
@@ -122,26 +120,21 @@ const AllTaskContent: FC = () => {
 
     useEffect(() => {
         distributeTasks(tasks);
-
     }, [tasks]);
-
-    useEffect(() => {
-        console.log('draggedItem', draggedItem);
-    }, [draggedItem]);
 
     return (
         <section className='task'>
             <TaskColumn
-                TaskItem={<TaskBlock activeColumn={activeColumn} handleDrop={handleDrop} setActiveColumn={setActiveColumn} setDraggedItem={setDraggedItem} deleteItem={deleteItem} array={task['todo']} filter={'todo'} activeClass='activeClass' />}
+                TaskItem={<TaskBlock activeColumn={activeColumn} handleDrop={handleDrop} setActiveColumn={setActiveColumn} setDraggedItem={setDraggedItem} deleteItem={deleteItem} array={task['todo']} taskType={'todo'} activeClass='activeClass' />}
                 HeaderItems={<HeaderTask taskName="To Do" taskType="todo" toggleTotalFilter={toggleTotalFilter} totalFilter={taskClass} count={taskCount} toggleTaskClass={toggleTaskClass} />} />
             <TaskColumn
-                TaskItem={<TaskBlock activeColumn={activeColumn} handleDrop={handleDrop} setActiveColumn={setActiveColumn} setDraggedItem={setDraggedItem} deleteItem={deleteItem} array={task['inprogress']} filter={'inprogress'} activeClass='activeClass' />}
+                TaskItem={<TaskBlock activeColumn={activeColumn} handleDrop={handleDrop} setActiveColumn={setActiveColumn} setDraggedItem={setDraggedItem} deleteItem={deleteItem} array={task['inprogress']} taskType={'inprogress'} activeClass='activeClass' />}
                 HeaderItems={<HeaderTask taskName="In Progress" taskType="inprogress" toggleTotalFilter={toggleTotalFilter} totalFilter={taskClass} count={taskCount} toggleTaskClass={toggleTaskClass} />} />
             <TaskColumn
-                TaskItem={<TaskBlock activeColumn={activeColumn} handleDrop={handleDrop} setActiveColumn={setActiveColumn} setDraggedItem={setDraggedItem} deleteItem={deleteItem} array={task['needreview']} filter={'needreview'} activeClass='activeClass' />}
+                TaskItem={<TaskBlock activeColumn={activeColumn} handleDrop={handleDrop} setActiveColumn={setActiveColumn} setDraggedItem={setDraggedItem} deleteItem={deleteItem} array={task['needreview']} taskType={'needreview'} activeClass='activeClass' />}
                 HeaderItems={<HeaderTask taskName="Need Review" taskType="needreview" toggleTotalFilter={toggleTotalFilter} totalFilter={taskClass} count={taskCount} toggleTaskClass={toggleTaskClass} />} />
             <TaskColumn
-                TaskItem={<TaskBlock activeColumn={activeColumn} handleDrop={handleDrop} setActiveColumn={setActiveColumn} setDraggedItem={setDraggedItem} deleteItem={deleteItem} array={task['done']} filter={'done'} activeClass='activeClass' />}
+                TaskItem={<TaskBlock activeColumn={activeColumn} handleDrop={handleDrop} setActiveColumn={setActiveColumn} setDraggedItem={setDraggedItem} deleteItem={deleteItem} array={task['done']} taskType={'done'} activeClass='activeClass' />}
                 HeaderItems={<HeaderTask taskName="Done" taskType="done" toggleTotalFilter={toggleTotalFilter} totalFilter={taskClass} count={taskCount} toggleTaskClass={toggleTaskClass} />} />
         </section>
     );

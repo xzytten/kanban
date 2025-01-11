@@ -15,14 +15,13 @@ import '../../../scss/filter/all_filter_modal.scss'
 
 interface IAllFilterModal {
     setShowAllFilters: React.Dispatch<React.SetStateAction<boolean>>,
-    taskId?: string,
     taskFilters: IFilter[],
-    setTaskInfo: React.Dispatch<React.SetStateAction<ITask>>,
+    setTaskFilters?: React.Dispatch<React.SetStateAction<IFilter[]>>,
+    setTaskInfo?: React.Dispatch<React.SetStateAction<ITask>>,
     task: ITask,
 }
 
-const AllFilterModal: FC<IAllFilterModal> = ({ setShowAllFilters, taskId, taskFilters, setTaskInfo, task }) => {
-
+const AllFilterModal: FC<IAllFilterModal> = ({ setShowAllFilters, taskFilters, setTaskFilters, setTaskInfo, task }) => {
 
     const [showAddFilterModal, setShowAddFilterModal] = useState<boolean>(false)
 
@@ -30,28 +29,29 @@ const AllFilterModal: FC<IAllFilterModal> = ({ setShowAllFilters, taskId, taskFi
 
     const dispatch = useAppDispatch()
 
-
-    const addFilterInTask = (filter: IFilter) => {
-        if (task.filters.length < 5) {
-            try {
-                const isFilterExists = taskFilters.some(existingFilter => existingFilter._id === filter._id);
-
-                if (!isFilterExists && filter._id && task._id) {
-                    dispatch(addFilterToTask({ filter, taskId: task._id }));
-                    setTaskInfo({ ...task, filters: [...task.filters, filter] });
-                }
-                // setShowAllFilters(false)
-            } catch (error) {
-                console.log(error)
-            }
-        }
+    const canAddFilter = (filter: IFilter): boolean => {
+        return taskFilters.length < 5 && !taskFilters.some(existingFilter => existingFilter._id === filter._id);
     }
 
-    const removeFilterFromTheTask = (filter: IFilter): void => {
+    const updateFilters = (filter: IFilter, action: 'add' | 'remove') => {
         try {
-            if (task._id && filter._id) {
-                dispatch(removeFilterFromTask({ taskId: task._id, filterId: filter._id }))
-                setTaskInfo({ ...task, filters: [...task.filters.filter(f => f._id !== filter._id)] });
+            if (!task._id || !filter._id) return;
+
+            if (action === 'add' && canAddFilter(filter)) {
+                if (setTaskInfo) {
+                    dispatch(addFilterToTask({ filter, taskId: task._id }));
+                    setTaskInfo({ ...task, filters: [...task.filters, filter] });
+                } else if (setTaskFilters) {
+                    setTaskFilters([...taskFilters, filter])
+                }
+            } else if (action === 'remove') {
+                if (setTaskInfo) {
+                    dispatch(removeFilterFromTask({ taskId: task._id, filterId: filter._id }))
+
+                    setTaskInfo({ ...task, filters: [...task.filters.filter(f => f._id !== filter._id)] });
+                } else if (setTaskFilters) {
+                    setTaskFilters([...taskFilters.filter(f => f._id !== filter._id)])
+                }
             }
         } catch (error) {
             console.log(error)
@@ -67,7 +67,6 @@ const AllFilterModal: FC<IAllFilterModal> = ({ setShowAllFilters, taskId, taskFi
                 className='background-modal-filter'
                 onClick={() => setShowAllFilters(false)}
             >
-
                 <ul
                     className='all-filter-modal'
                     onClick={(e) => e.stopPropagation()}
@@ -75,23 +74,15 @@ const AllFilterModal: FC<IAllFilterModal> = ({ setShowAllFilters, taskId, taskFi
                     {
                         filters.map(filter => {
                             const isFilterInTask = taskFilters.some(taskFilter => taskFilter._id === filter._id);
-                            return !isFilterInTask ? (
+                            return (
                                 <li
                                     className='all-filter-modal__filter'
                                     key={filter._id}
-                                    onClick={() => addFilterInTask(filter)}
+                                    onClick={() => updateFilters(filter, isFilterInTask ? 'remove' : 'add')}
                                 >
-                                    <FilterItem filter={filter}/>
+                                    <FilterItem filter={filter} borderColor={isFilterInTask ? 'gold' : undefined} />
                                 </li>
-                            ) : (
-                                <li
-                                    className='all-filter-modal__filter'
-                                    key={filter._id}
-                                    onClick={() => removeFilterFromTheTask(filter)}
-                                >
-                                    <FilterItem filter={filter} borderColor='gold'/>
-                                </li>
-                            );
+                            )
                         })
                     }
                     <AddFilterButton type={'modal'} setShowAddFilterModal={setShowAddFilterModal} />

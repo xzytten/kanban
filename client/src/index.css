@@ -1,5 +1,5 @@
 body {
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(244, 244, 244);
     /* overflow: hidden; */
 }
 
@@ -14,7 +14,7 @@ body {
 
 textarea {
     backface-visibility: hidden;
-    -webkit-font-smoothing: antialiased;
+    -webkit-font-smoothing: antialiased;    
     -moz-osx-font-smoothing: grayscale;
 }
 

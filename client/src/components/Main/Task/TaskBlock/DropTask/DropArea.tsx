@@ -5,10 +5,6 @@ import '../../../../../scss/task/drop_area.scss'
 const DropArea: FC = () => {
     const [showArea, setShowArea] = useState<boolean>(false)
     
-    useEffect(() => {
-        console.log('-----------------showArea', showArea)
-    },[showArea])
-    
     return (
         <section
             onDragEnter={() => setShowArea(true)}  

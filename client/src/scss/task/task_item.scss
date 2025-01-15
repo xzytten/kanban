@@ -66,6 +66,7 @@
             font-size: 17px;
             transition: 0.1s;
             height: 40px;
+            overflow-wrap: break-word;
         }
 
         &__name:hover {
@@ -76,7 +77,7 @@
 
         &__description {
             height: 45px;
-            // margin-top: 31px;
+            overflow-wrap: break-word;
             font-size: 14px;
             color: rgba(0, 0, 0, 60%);
         }

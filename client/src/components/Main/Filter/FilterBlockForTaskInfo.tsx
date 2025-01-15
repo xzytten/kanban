@@ -9,10 +9,10 @@ import '../../../scss/filter/filter_block_for_task_info.scss'
 
 interface IFilterBlockForTaskInfo {
     filters: IFilter[],
-    setShowAllFilters?: React.Dispatch<React.SetStateAction<boolean>>,
+    AddButton?: React.ReactNode,
 }
 
-const FilterBlockForTaskInfo: FC<IFilterBlockForTaskInfo> = ({ filters, setShowAllFilters }) => {
+const FilterBlockForTaskInfo: FC<IFilterBlockForTaskInfo> = ({ filters, AddButton}) => {
 
     return (
         <>
@@ -24,11 +24,7 @@ const FilterBlockForTaskInfo: FC<IFilterBlockForTaskInfo> = ({ filters, setShowA
                             <FilterItem filter={taskFilter} />
                         </li>
                     ))}
-                    {
-                        setShowAllFilters
-                        &&
-                        <AddFiltersButton setShowAllFilters={setShowAllFilters} />
-                    }
+                    {AddButton}
                 </ul>
             }
         </>

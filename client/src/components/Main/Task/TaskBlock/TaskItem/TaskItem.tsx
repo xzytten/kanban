@@ -38,7 +38,7 @@ const TaskItem: FC<ITaskItemProps> = ({ setDraggedItem, task, taskType, deleteIt
     }
 
     const toggleEditButton = () => {
-        setEditButton(!editButton);
+        setEditButton(!editButton)
     }
 
     const toggleModal = () => {
@@ -62,13 +62,10 @@ const TaskItem: FC<ITaskItemProps> = ({ setDraggedItem, task, taskType, deleteIt
         setTaskInfo(task)
     }, [task])
 
-    useEffect(() => {
-        console.log("taskItem", task, "taskItem")
-    }, [task])
 
     return (
         <article className='task__item' draggable onDragStart={() => handleDragStart(taskInfo)}>
-            {editButton && <TaskEditButton task={taskInfo} deleteItem={() => deleteOneItem(taskInfo._id)} />}
+            {editButton && <TaskEditButton task={taskInfo} deleteItem={() => deleteOneItem(taskInfo._id)} setEditButton={setEditButton}/>}
             {viewTask && <ViewTask setTaskInfo={setTaskInfo} task={taskInfo} toggleModal={toggleModal} />}
             <div className='task__item__header'>
                 <div className='task__item__header__block'>
@@ -100,7 +97,7 @@ const TaskItem: FC<ITaskItemProps> = ({ setDraggedItem, task, taskType, deleteIt
                             </>)
                         }
                     </ul>
-                    <span className='task__item__header__block__edit' onClick={toggleEditButton}></span>
+                    <span className='task__item__header__block__edit' onClick={() => toggleEditButton()}></span>
                 </div>
                 <div className='task__item__block'>
                     <h3 className='task__item__block__name' onClick={toggleModal}>{taskInfo.title.length > 50 ? taskInfo.title.slice(0, 50) + "..." : taskInfo.title}</h3>

@@ -9,16 +9,19 @@ import { IMember } from '../../../types/IMember';
 
 const Member: FC = () => {
     const [members, setMembers] = useState<IMember[] | null>(null)
-    const dispatch = useAppDispatch();
 
-    const memberIds = useAppSelector(project => project.project.project?.member);
+    const dispatch = useAppDispatch();
+    const projectId = useAppSelector(state => state.project.project?._id);
     const allMembers = useAppSelector(member => member.member?.member);
 
+    console.log('projectId', projectId);
+    console.log('members', members);
+
     useEffect(() => {
-        if (memberIds) {
-            dispatch(getMember({ memberIds }))
+        if (projectId) {
+            dispatch(getMember({ projectId }))
         }
-    }, [dispatch, memberIds])
+    }, [dispatch, projectId])
 
     useEffect(() => {
         if (allMembers) {
@@ -28,7 +31,7 @@ const Member: FC = () => {
 
     return (
         <article className='main__members'>
-            {members?.map(member => <MemberItem key={member._id} member={member}/>)}
+            {members?.map(member => <MemberItem key={member._id} member={member} />)}
         </article>
     );
 };

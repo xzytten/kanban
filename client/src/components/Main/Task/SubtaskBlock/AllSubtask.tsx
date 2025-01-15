@@ -8,13 +8,16 @@ import SubtaskItemGroup from './SubtaskItem/SubtaskItemGroup';
 interface ISubtaskProps {
     subtask: ISubtask[],
     showCheckbox: boolean,
+    subtaskType: 'viewModal' | 'editModal';
+    taskId?: string,
+    setSubtasks: React.Dispatch<React.SetStateAction<ISubtask[]>>
 }
 
 
-const AllSubTask: FC<ISubtaskProps> = ({ subtask, showCheckbox}) => {
+const AllSubTask: FC<ISubtaskProps> = ({ taskId, subtask, showCheckbox, setSubtasks, subtaskType }) => {
     return (
         <div className='subtask'>
-            <SubtaskItemGroup subtasks={subtask} showCheckbox={showCheckbox}/>
+            <SubtaskItemGroup taskId={taskId} subtasks={subtask} subtaskType={subtaskType} setSubtasks={setSubtasks} showCheckbox={showCheckbox} />
         </div>
     );
 };

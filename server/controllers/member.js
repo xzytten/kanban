@@ -1,4 +1,5 @@
 import Member from '../models/Member.js'
+import Project from '../models/Project.js';
 import User from '../models/User.js';
 
 export const addMember = async (req, res) => {
@@ -25,9 +26,18 @@ export const addMember = async (req, res) => {
 
 export const getMember = async (req, res) => {
     try {
-        const { memberIds } = req.body;
+        const { projectId } = req.params;
+        
+        const project  = await Project.findById(projectId)
+        console.log(project)
 
-        const members = await Member.find({ _id: { $in: memberIds } });
+        if(!project){
+            res.status(400).json({
+                message: 'Project not found'
+            });
+        }
+        
+        const members = await Member.find({ _id: { $in: [...project.member, project.author] } });
 
         const membersWithNames = [];
 

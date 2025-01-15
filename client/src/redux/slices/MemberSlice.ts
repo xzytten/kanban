@@ -5,7 +5,7 @@ import axios from '../../utils/axios'
 
 interface IMemberState {
     member: IMember[],
-    status: string ,
+    status: string,
 }
 
 interface RootState {
@@ -20,9 +20,9 @@ const initialState: IMemberState = {
 
 export const getMember = createAsyncThunk(
     'member/getMember',
-    async (params: { memberIds?: string[] }) => {
+    async ({ projectId }: { projectId: string }) => {
         try {
-            const { data } = await axios.post('member/getMember', params);
+            const { data } = await axios.get(`member/getMember/${projectId}`);
             return data;
         } catch (error) {
             throw (error)

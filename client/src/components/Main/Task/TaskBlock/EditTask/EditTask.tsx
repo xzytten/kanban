@@ -1,64 +1,101 @@
 import { FC, useEffect, useState, useRef } from 'react';
 
-import { ISubtask } from '../../interfaceTask/ISubtask';
 import { ITask } from '../../../../../types/ITask';
 import { IFilter } from '../../../../../types/IFilter';
 
-import FilterItem from '../../../Filter/FilterItem';
 import DatePicker from 'react-datepicker';
 import AllFilterModal from '../../../Filter/AllFilterModal';
-import AddFiltersButton from '../../../Filter/AddFiltersButton';
 import FilterBlockForTaskInfo from '../../../Filter/FilterBlockForTaskInfo';
 
 import { useAppDispatch } from '../../../../../redux/hooks/hook';
 import { editTask } from '../../../../../redux/slices/TaskSlice';
 
 import '../../../../../scss/task/add_task.scss';
+import AddFiltersButton from '../../../Filter/AddFiltersButton';
+import SubtaskBlock from '../../SubtaskBlock/SubtaskBlock';
+import { ISubtask } from '../../interfaceTask/ISubtask';
 
 interface IEditTaskProps {
-    task: ITask;
-    toggleModal: React.MouseEventHandler<HTMLParagraphElement>;
+    task: ITask,
+    setEditTaskModal: React.Dispatch<React.SetStateAction<boolean>>,
+    setEditButton: React.Dispatch<React.SetStateAction<boolean>>,
 }
 
-const EditTask: FC<IEditTaskProps> = ({ task, toggleModal }) => {
+const EditTask: FC<IEditTaskProps> = ({ task, setEditTaskModal, setEditButton }) => {
 
     const dispatch = useAppDispatch();
 
     const [submitButton, setSubmitButton] = useState<boolean>(false);
     const [taskFilters, setTaskFilters] = useState<IFilter[]>(task.filters);
+    const [taskSubtasks, setTaskSubtasks] = useState<ISubtask[]>(task.subtasks)
     const [showAllFilters, setShowAllFilters] = useState<boolean>(false);
-    const [editedTask, setEditedTask] = useState<Partial<Omit<ITask, 'filters'> & { filters: string[] }>>({});
+    const [taskData, setTaskData] = useState<Partial<Omit<ITask, 'filters'> & { filters: string[] }>>({});
 
     const taskTitleRef = useRef<HTMLTextAreaElement | null>(null);
     const taskDescriptionRef = useRef<HTMLTextAreaElement | null>(null);
 
-    const [taskData, setTaskData] = useState<Partial<Omit<ITask, 'filters'> & { filters: string[] }>>({
-        title: task.title,
-        description: task.description,
-        date: task.date,
-        subtasks: task.subtasks,
-        filters: taskFilters.map((filter) => filter._id || ''),
-    });
-
     const handleTaskDataChange = (field: keyof ITask, value: any) => {
         setTaskData((prev) => ({
             ...prev,
-            [field]: value,
+            [field]: field === 'filters' ? value.map((filter: IFilter) => filter._id) : value,
         }));
-        setEditedTask((prev) => ({
-            ...prev,
-            [field]: value,
-        }));
-        setSubmitButton(true);
     };
+
+    useEffect(() => {
+        checkIfUpdated();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [taskData, taskFilters, taskSubtasks]);
 
     const SubmitEdit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        updatedTask();
-        if (Object.keys(editedTask).length > 0 && task._id) {
-            await dispatch(editTask({ taskId: task._id, updates: editedTask }));
+        try {
+            if (Object.keys(taskData).length > 0 && task._id) {
+                await dispatch(editTask({ taskId: task._id, updates: taskData }));
+                setEditTaskModal(false)
+                setEditButton(false)
+            }
+        } catch (error) {
+            console.log(error)
         }
     };
+
+    const areArrayEqual = <T extends IFilter | ISubtask>(array1: T[], array2: T[], ObjType: 'Filter' | 'Subtask'): boolean => {
+        if (array1.length !== array2.length) return false;
+        return array1.every((obj1, index) => {
+            const obj2 = array2[index];
+            if (ObjType === 'Subtask' && 'status' in obj1 && 'status' in obj2) {
+                return (obj1.status === obj2.status && obj1._id === obj2._id);
+            }
+            if (ObjType === "Filter" && obj1._id === obj2._id) {
+                return obj1._id === obj2._id;
+            }
+            return false;
+        });
+    };
+
+    const checkIfUpdated = (): void => {
+        const isTitleUpdated = taskData.title !== undefined && taskData.title !== task.title;
+        const isDescriptionUpdated = taskData.description !== undefined && taskData.description !== task.description;
+        const isDateUpdated = taskData.date !== undefined && taskData.date !== task.date;
+        const areFiltersUpdated = !areArrayEqual(taskFilters, task.filters, 'Filter');
+        const areSubtasksUpdated = !areArrayEqual(taskSubtasks, task.subtasks, 'Subtask');
+        console.log(areSubtasksUpdated)
+        if (isTitleUpdated || isDescriptionUpdated || isDateUpdated || areFiltersUpdated || areSubtasksUpdated) {
+            setSubmitButton(true);
+        } else {
+            setSubmitButton(false);
+        }
+    };
+
+    const updateFilters = (filters: IFilter[]): void => {
+        setTaskFilters(filters)
+        handleTaskDataChange('filters', filters)
+    }
+
+    const updateSubtasks = (subtasks: ISubtask[]): void => {
+        setTaskSubtasks(subtasks);
+        handleTaskDataChange('subtasks', [...subtasks.map(({ description, status }) => ({ status, description }))]);
+    }
 
     const handleTextAndSize = (
         e: React.ChangeEvent<HTMLTextAreaElement>,
@@ -78,54 +115,6 @@ const EditTask: FC<IEditTaskProps> = ({ task, toggleModal }) => {
         return parsedDate.toISOString();
     };
 
-    const areFiltersEqual = (filters1: IFilter[], filters2: IFilter[]): boolean => {
-        if (filters1.length !== filters2.length) return false;
-
-        return filters1.every((filter1, index) => {
-            const filter2 = filters2[index];
-            return (
-                filter1._id === filter2._id
-            );
-        });
-    };
-
-    const checkIfUpdated = (): void => {
-        if (
-            taskData.title !== task.title ||
-            taskData.description !== task.description ||
-            taskData.date !== task.date ||
-            !areFiltersEqual(taskFilters, task.filters)
-        ) {
-            setSubmitButton(true);
-        } else {
-            setSubmitButton(false);
-        }
-    };
-
-    const updatedTask = (): void => {
-        if (!areFiltersEqual(taskFilters, task.filters)) {
-            setEditedTask({ ...editedTask, filters: [...taskFilters.map(filter => filter._id || '')] });
-            console.log(editedTask)
-        }
-
-        if (taskData.title !== task.title) {
-            setEditedTask((prev) => ({ ...prev, title: taskData.title }));
-        }
-
-        if (taskData.description !== task.description) {
-            setEditedTask((prev) => ({ ...prev, description: taskData.description }));
-        }
-
-        checkIfUpdated();
-    };
-
-    useEffect(() => {
-        if (!areFiltersEqual(taskFilters, task.filters)) {
-            handleTaskDataChange('filters', taskFilters);
-        }
-        checkIfUpdated();
-    }, [taskFilters]);
-
     return (
         <>
             {showAllFilters && (
@@ -133,22 +122,24 @@ const EditTask: FC<IEditTaskProps> = ({ task, toggleModal }) => {
                     taskFilters={taskFilters}
                     task={task}
                     setShowAllFilters={setShowAllFilters}
-                    setTaskFilters={setTaskFilters}
+                    setTaskFilters={updateFilters}
                 />
             )}
             <div className="add__task">
                 <form className="add__task__block" onSubmit={SubmitEdit}>
-                    <span className="add__task__block__exit" onClick={toggleModal}></span>
+                    <span className="add__task__block__exit" onClick={() => { setEditTaskModal(false); setEditButton(false) }}></span>
                     <article className="add__task__block__header">
-                        <FilterBlockForTaskInfo
-                            filters={taskFilters}
-                            setShowAllFilters={setShowAllFilters}
-                        />
+                        <>
+                            <FilterBlockForTaskInfo
+                                filters={taskFilters}
+                                AddButton={<AddFiltersButton setShowAllFilters={setShowAllFilters} />}
+                            />
+                        </>
                         <div className="add__task__block__header__date">
                             <DatePicker
-                                selected={taskData.date}
+                                selected={taskData.date !== undefined ? taskData.date : task.date}
                                 onChange={(e) => handleTaskDataChange('date', formatDate(`${e}`))}
-                                dateFormat="dd/MM"
+                                dateFormat="MMM dd"
                                 className="add__task__block__header__date__info"
                                 popperPlacement="bottom"
                             />
@@ -157,20 +148,21 @@ const EditTask: FC<IEditTaskProps> = ({ task, toggleModal }) => {
                     </article>
                     <article className="add__task__block__form">
                         <textarea
-                            placeholder="Task name"
+                            placeholder="Title"
                             className="add__task__block__form__title"
-                            value={taskData.title}
+                            value={taskData.title !== undefined ? taskData.title : task.title}
                             ref={taskTitleRef}
                             onChange={(e) => handleTextAndSize(e, 'title', handleTaskDataChange, taskTitleRef)}
                         />
                         <textarea
                             className="add__task__block__form__description"
                             placeholder="Description"
-                            value={taskData.description}
+                            value={taskData.description !== undefined ? taskData.description : task.description}
                             ref={taskDescriptionRef}
                             onChange={(e) => handleTextAndSize(e, 'description', handleTaskDataChange, taskDescriptionRef)}
                         />
                     </article>
+                    <SubtaskBlock subtaskType='editModal' subtasks={taskSubtasks} showCheckbox={true} setSubtasks={updateSubtasks} />
                     <article className="add__task__block__files"></article>
                     {submitButton && (
                         <button className="add__task__block__submit" type="submit">

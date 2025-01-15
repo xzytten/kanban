@@ -8,7 +8,7 @@ export interface ITask {
     type: string,
     filters: IFilter[] | [],
     description: string,
-    subtasks?: ISubtask[],
+    subtasks: ISubtask[] | [],
     views?: number,
     author: string,
     date: Date,

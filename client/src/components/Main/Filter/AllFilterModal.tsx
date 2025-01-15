@@ -16,7 +16,7 @@ import '../../../scss/filter/all_filter_modal.scss'
 interface IAllFilterModal {
     setShowAllFilters: React.Dispatch<React.SetStateAction<boolean>>,
     taskFilters: IFilter[],
-    setTaskFilters?: React.Dispatch<React.SetStateAction<IFilter[]>>,
+    setTaskFilters?: (filters: IFilter[]) => void,
     setTaskInfo?: React.Dispatch<React.SetStateAction<ITask>>,
     task: ITask,
 }

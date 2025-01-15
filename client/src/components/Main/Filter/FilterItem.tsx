@@ -7,13 +7,13 @@ import '../../../scss/filter/filter_item.scss';
 
 interface IFilterItem {
     filter: IFilter,
-    type?: string,
+    type?: 'menu' | 'modal',
     borderColor?: string,
 }
+
 const FilterItem: FC<IFilterItem> = ({ filter, type, borderColor }) => {
     const [showFilterInfo, setShowFilterInfo] = useState<boolean>(false)
     return (
-
         <>
             <article
                 className={`filter ${type === 'menu' && 'menu'}`}

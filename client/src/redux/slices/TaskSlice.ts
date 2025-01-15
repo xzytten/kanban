@@ -22,7 +22,6 @@ const initialState: ITaskState = {
     editTypeStatus: ''
 }
 
-
 export const addTask = createAsyncThunk(
     'task/addTask',
     async (params: ITask) => {
@@ -104,7 +103,7 @@ export const removeFilterFromTask = createAsyncThunk(
 export const editTask = createAsyncThunk(
     'task/editTask',
     async (params: { taskId: string, updates: Partial<Omit<ITask, 'filters'> & { filters: string[] }> }) => {
-        try {                                                                                                                                                                                       
+        try {
             const { data } = await axios.put('task/editTask', params);
 
             return data;
@@ -114,7 +113,17 @@ export const editTask = createAsyncThunk(
     }
 )
 
-
+export const editSubtaskStatus = createAsyncThunk(
+    'subtask/editStatus',
+    async (params: { subtaskId: string, status: boolean, taskId: string }) => {
+        try {
+            const { data } = await axios.put('subtask/editStatus', params);
+            return data
+        } catch (error) {
+            throw (error)
+        }
+    }
+)
 
 const taskSlice = createSlice({
     name: 'task',
@@ -249,6 +258,22 @@ const taskSlice = createSlice({
             })
             .addCase(editTask.rejected, (state) => {
                 state.editTypeStatus = 'rejected'
+            })
+
+            //editSubtaskStatus 
+            .addCase(editSubtaskStatus.pending, (state) => {
+                state.status = 'pednging'
+            })
+            .addCase(editSubtaskStatus.fulfilled, (state, action) => {
+                state.status = 'fullfiled'
+                const subtask = action.payload.subtask 
+                const taskIndex = state.tasks.findIndex((task) => task._id === action.payload.taskId);
+                if(taskIndex !== -1){
+                    state.tasks[taskIndex].subtasks = state.tasks[taskIndex].subtasks.map(sub => sub._id === subtask._id ? {...sub, status: subtask.status} : sub )
+                }
+            })
+            .addCase(editSubtaskStatus.rejected, (state) => {
+                state.status = 'rejected'
             })
 
     }

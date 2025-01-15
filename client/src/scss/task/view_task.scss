@@ -65,7 +65,7 @@
             width: 400px;
             height: auto;
             margin-left: 45px;
-            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
 
         &__description {
@@ -75,6 +75,7 @@
             font-size: 17px;
             line-height: 30px;
             margin-left: 45px;
+            overflow-wrap: break-word;
         }
 
     }

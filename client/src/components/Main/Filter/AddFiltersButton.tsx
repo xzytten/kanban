@@ -11,6 +11,7 @@ const AddFiltersButton: FC<IAddFiltersButton> = ({setShowAllFilters}) => {
         <button
             onClick={() => setShowAllFilters(true)}
             className='add__filters__button'
+            type='button'
         >
             +
         </button>

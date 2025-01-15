@@ -6,7 +6,7 @@ const memberRouter = new Router();
 //http://localhost:3002/api/task/memberPost
 memberRouter.post('/addMember', addMember)
 
-memberRouter.post('/getMember', getMember)
+memberRouter.get('/getMember/:projectId', getMember)
 
 //POST
 

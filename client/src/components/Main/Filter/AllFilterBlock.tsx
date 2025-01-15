@@ -2,12 +2,12 @@ import { FC, useState } from 'react';
 import { useAppSelector } from '../../../redux/hooks/hook';
 import FilterItem from './FilterItem';
 import AddFilterModal from './AddFilterModal';
-
-import '../../../scss/filter/all_filter_block.scss';
 import AddFilterButton from './AddFilterButton';
 
+import '../../../scss/filter/all_filter_block.scss';
+
 interface IAllFiltersBlock {
-    type: "menu" | "task",
+    type: "menu" | "modal",
 }
 
 const AllFiltersBlock: FC<IAllFiltersBlock> = ({ type }) => {
@@ -28,10 +28,9 @@ const AllFiltersBlock: FC<IAllFiltersBlock> = ({ type }) => {
 
             <AddFilterButton type={'menu'} setShowAddFilterModal={setShowAddFilterModal} />
 
-
             {showAddFilterModal && <AddFilterModal setShowAddFilterModal={setShowAddFilterModal} />}
         </ul>
     )
 }
 
-export default AllFiltersBlock;
+export default AllFiltersBlock;              

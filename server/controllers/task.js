@@ -100,8 +100,7 @@ export const editTypeTask = async (req, res) => {
             message: 'Error updating task'
         });
     }
-}
-
+}         
 
 //getAllTask
 export const getAllTask = async (req, res) => {
@@ -139,6 +138,7 @@ export const editTask = async (req, res) => {
     try {
         const { taskId, updates } = req.body;
         console.log(updates)
+
         if (!taskId || !updates || typeof updates !== 'object') {
             return res.status(400).json({ message: "Invalid request data" });
         }
@@ -150,10 +150,26 @@ export const editTask = async (req, res) => {
         );
 
         if (!updatedTask) {
-            return res.status(404).json({ message: "Task not found"});
+            return res.status(500).json({ message: "Task not found" });
+        } else {
+            const filters = await Filter.find({ _id: { $in: updatedTask.filters } });
+
+            res.status(200).json({
+                message: "Task updated successfully", updatedTask: {
+                    _id: updatedTask._id,
+                    project: updatedTask.project,
+                    title: updatedTask.title,
+                    description: updatedTask.description,
+                    type: updatedTask.type,
+                    subtasks: updatedTask.subtasks,
+                    filters: filters,
+                    author: updatedTask.author,
+                    date: updatedTask.date,
+                }
+            });
         }
 
-        res.status(200).json({ message: "Task updated successfully", updatedTask });
+
     } catch (error) {
         res.status(500).json({ message: 'Error, something went wrong' });
     }

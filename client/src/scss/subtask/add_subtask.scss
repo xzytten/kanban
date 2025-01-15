@@ -25,17 +25,26 @@
             &__button {
                 width: 95px;
                 height: 40px;
-                background-color: #7A51EE;
                 border: none;
                 border-radius: 5px;
                 color: white;
                 font-size: 18px;
+
+            }
+
+            &__button__enabled {
+                background-color: #7A51EE;
 
                 &:hover {
                     cursor: pointer;
                     transform: scale(1.05);
                 }
             }
+
+            &__button__disabled {
+                background-color: grey;
+            }
+
         }
 
         &__description {
@@ -43,7 +52,7 @@
             display: block;
             margin-top: 15px;
             width: 576px;
-       
+
 
             &:focus {
                 border: 1px solid $borderColor;

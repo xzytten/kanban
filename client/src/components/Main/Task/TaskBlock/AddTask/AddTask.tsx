@@ -17,7 +17,7 @@ interface IAddTaskProps {
 
 const AddTask: FC<IAddTaskProps> = ({ taskType, setModal }) => {
 
-    const textareaRef = useRef<HTMLTextAreaElement | null>(null); // використання useRef для доступу до textarea
+    const textareaRef = useRef<HTMLTextAreaElement | null>(null); 
     const [showSubtasks, setShowSubtasks] = useState<boolean>(false);
 
     const [startDate, setStartDate] = useState<Date | null>(null);
@@ -49,8 +49,8 @@ const AddTask: FC<IAddTaskProps> = ({ taskType, setModal }) => {
     const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>): void => {
         setDescription(e.target.value);
         if (textareaRef.current) {
-            textareaRef.current.style.height = 'auto'; // Скидає висоту перед налаштуванням
-            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; // Встановлює нову висоту
+            textareaRef.current.style.height = 'auto'; 
+            textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`; 
         }
     };
 
@@ -103,7 +103,7 @@ const AddTask: FC<IAddTaskProps> = ({ taskType, setModal }) => {
                     </label>
                 </div>
                 {
-                    showSubtasks && <SubtaskBlock setSubtasks={setSubtasks} subtasks={subtasks} showCheckbox={false} />
+                    showSubtasks && <SubtaskBlock subtaskType='editModal' setSubtasks={setSubtasks} subtasks={subtasks} showCheckbox={false} />
 
                 }
                 <article className='add__task__block__files'></article>

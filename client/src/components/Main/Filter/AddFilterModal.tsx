@@ -61,7 +61,7 @@ const AddFilterModal: FC<IAddFilterModal> = ({ setShowAddFilterModal }) => {
             </div>
             <div className='addfilter'>
                 <h3 className='addfilter__title'>New Filter</h3>
-                <FilterItem filter={{ name, backgroundColor, textColor }} type={'menu'} />
+                <FilterItem filter={{ name, backgroundColor, textColor }} type={'modal'} />
                 <form onSubmit={handleSubmit} className='addfilter__form'>
                     <label className='addfilter__form__name'>
                         Name

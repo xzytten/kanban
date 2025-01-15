@@ -17,7 +17,6 @@ taskRouter.delete('/deleteOneTask', deleteOneTask)
 //http://localhost:3002/api/task/deleteOneTask
 taskRouter.patch('/editTypeTask', editTypeTask)
 
-
 //http://localhost:3002/api/task/deleteOneTask
 taskRouter.put('/editTask', editTask)
 
